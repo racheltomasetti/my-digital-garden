@@ -1,6 +1,6 @@
 # my-digital-garden
 a space where I share my Self -- who I am, what I think about, what I am building, etc. etc. etc.
-
+---
 [9/28/2025 ~ 9:58 PM]
 _i have tried again and again to build out my website to no avail. nothing to show for all of these thoughts and ideas. never making it tangible. time to change that. don't think, build._
 ---
