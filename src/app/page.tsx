@@ -1,66 +1,59 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Home() {
+  const text = "Building... stay tuned...";
+
+  const container = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+      },
+    },
+  };
+
+  const child = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 flex items-center justify-center p-4">
-      <div className="text-center">
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{
-            type: "spring",
-            stiffness: 260,
-            damping: 20
-          }}
-        >
-          <h1 className="text-6xl md:text-8xl font-bold text-white mb-8 drop-shadow-2xl">
-            🚧 Under Construction 🚧
-          </h1>
-        </motion.div>
+    <div
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      style={{ backgroundColor: "rgb(16, 15, 15)" }}
+    >
+      <motion.div
+        className="absolute opacity-35 pointer-events-none"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 0.35, scale: 1 }}
+        transition={{ delay: 1, duration: 1.5 }}
+      >
+        <Image
+          src="/assets/glow.png"
+          alt=""
+          width={600}
+          height={600}
+          className="w-96 md:w-[600px]"
+        />
+      </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <p className="text-xl md:text-2xl text-white/90 mb-8 font-medium">
-            Building something awesome...
-          </p>
-        </motion.div>
-
-        <motion.div
-          className="flex justify-center gap-3 mb-12"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5 }}
-        >
-          {[0, 1, 2].map((i) => (
-            <motion.div
-              key={i}
-              className="w-4 h-4 bg-white rounded-full"
-              animate={{
-                y: [0, -20, 0],
-              }}
-              transition={{
-                duration: 0.6,
-                repeat: Infinity,
-                delay: i * 0.1,
-              }}
-            />
-          ))}
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7 }}
-          className="text-white/80 text-lg"
-        >
-          Stay tuned for the launch! 🚀
-        </motion.div>
-      </div>
+      <motion.h1
+        className="text-6xl md:text-8xl font-medium opacity-80 relative z-10"
+        style={{ color: "rgb(206, 205, 195)" }}
+        variants={container}
+        initial="hidden"
+        animate="visible"
+      >
+        {text.split("").map((char, index) => (
+          <motion.span key={index} variants={child}>
+            {char}
+          </motion.span>
+        ))}
+      </motion.h1>
     </div>
   );
 }
