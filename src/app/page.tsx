@@ -7,16 +7,15 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const text = "building... stay tuned...";
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
     const calculateTimeLeft = () => {
       const now = new Date();
       const targetDate = new Date(now);
 
-      // Get next Monday at midnight
-      const daysUntilMonday = (1 - now.getDay() + 7) % 7 || 7;
-      targetDate.setDate(now.getDate() + daysUntilMonday);
-      targetDate.setHours(0, 0, 0, 0);
+      // Get midnight tonight
+      targetDate.setHours(24, 0, 0, 0);
 
       const difference = targetDate.getTime() - now.getTime();
 
@@ -27,6 +26,8 @@ export default function Home() {
           minutes: Math.floor((difference / 1000 / 60) % 60),
           seconds: Math.floor((difference / 1000) % 60),
         });
+      } else {
+        setIsComplete(true);
       }
     };
 
@@ -86,45 +87,57 @@ export default function Home() {
           ))}
         </motion.h1>
 
-        <motion.div
-          className="flex gap-6 md:gap-8 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2, duration: 0.8 }}
-        >
-          <div className="flex flex-col">
-            <span className="text-4xl md:text-5xl font-bold opacity-80" style={{ color: "rgb(206, 205, 195)" }}>
-              {String(timeLeft.days).padStart(2, '0')}
-            </span>
-            <span className="text-sm md:text-base opacity-60" style={{ color: "rgb(206, 205, 195)" }}>
-              days
-            </span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-4xl md:text-5xl font-bold opacity-80" style={{ color: "rgb(206, 205, 195)" }}>
-              {String(timeLeft.hours).padStart(2, '0')}
-            </span>
-            <span className="text-sm md:text-base opacity-60" style={{ color: "rgb(206, 205, 195)" }}>
-              hours
-            </span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-4xl md:text-5xl font-bold opacity-80" style={{ color: "rgb(206, 205, 195)" }}>
-              {String(timeLeft.minutes).padStart(2, '0')}
-            </span>
-            <span className="text-sm md:text-base opacity-60" style={{ color: "rgb(206, 205, 195)" }}>
-              minutes
-            </span>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-4xl md:text-5xl font-bold opacity-80" style={{ color: "rgb(206, 205, 195)" }}>
-              {String(timeLeft.seconds).padStart(2, '0')}
-            </span>
-            <span className="text-sm md:text-base opacity-60" style={{ color: "rgb(206, 205, 195)" }}>
-              seconds
-            </span>
-          </div>
-        </motion.div>
+        {isComplete ? (
+          <motion.div
+            className="text-4xl md:text-5xl font-bold opacity-80"
+            style={{ color: "rgb(206, 205, 195)" }}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            the time is now.
+          </motion.div>
+        ) : (
+          <motion.div
+            className="flex gap-6 md:gap-8 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 2, duration: 0.8 }}
+          >
+            <div className="flex flex-col">
+              <span className="text-4xl md:text-5xl font-bold opacity-80" style={{ color: "rgb(206, 205, 195)" }}>
+                {String(timeLeft.days).padStart(2, '0')}
+              </span>
+              <span className="text-sm md:text-base opacity-60" style={{ color: "rgb(206, 205, 195)" }}>
+                days
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-4xl md:text-5xl font-bold opacity-80" style={{ color: "rgb(206, 205, 195)" }}>
+                {String(timeLeft.hours).padStart(2, '0')}
+              </span>
+              <span className="text-sm md:text-base opacity-60" style={{ color: "rgb(206, 205, 195)" }}>
+                hours
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-4xl md:text-5xl font-bold opacity-80" style={{ color: "rgb(206, 205, 195)" }}>
+                {String(timeLeft.minutes).padStart(2, '0')}
+              </span>
+              <span className="text-sm md:text-base opacity-60" style={{ color: "rgb(206, 205, 195)" }}>
+                minutes
+              </span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-4xl md:text-5xl font-bold opacity-80" style={{ color: "rgb(206, 205, 195)" }}>
+                {String(timeLeft.seconds).padStart(2, '0')}
+              </span>
+              <span className="text-sm md:text-base opacity-60" style={{ color: "rgb(206, 205, 195)" }}>
+                seconds
+              </span>
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   );
