@@ -91,7 +91,7 @@ export default function Garden() {
       100
     );
     camera.position.set(5, 2.5, 6);
-    camera.lookAt(0, 1.5, 0);
+    camera.lookAt(0, 1, 0);
     console.log("Camera created");
 
     // Create renderer
