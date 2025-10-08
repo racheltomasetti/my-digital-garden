@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { createLighthouse } from "./scene/Lighthouse";
 import { populateGarden } from "./scene/Plants";
 import { createButterflies, createPollenParticles, animateButterflies, animatePollenParticles } from "./scene/Particles";
+import { createOcean, animateOcean } from "./scene/Ocean";
 
 export default function Garden() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -107,6 +108,11 @@ export default function Garden() {
     scene.add(ground);
     console.log("Ground plane added");
 
+    // Create and add ocean in the distance
+    const ocean = createOcean();
+    scene.add(ocean);
+    console.log("Ocean added");
+
     // Create and add lighthouse
     const lighthouse = createLighthouse();
     scene.add(lighthouse);
@@ -196,6 +202,9 @@ export default function Garden() {
       const angle = time * 2.0; // Very fast rotation
       beaconLight.position.x = -2 + Math.cos(angle) * 2.0; // Very large circle
       beaconLight.position.z = -2 + Math.sin(angle) * 2.0;
+
+      // Animate ocean waves
+      animateOcean(ocean, time);
 
       // Animate particle systems
       animateButterflies(butterflies, time);
