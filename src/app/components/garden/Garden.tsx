@@ -29,10 +29,53 @@ export default function Garden() {
     document.addEventListener("wheel", preventZoom, { passive: false });
     document.addEventListener("touchmove", preventZoom, { passive: false });
 
-    // Create scene
+    // Create scene with sunset gradient background
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x87ceeb);
-    console.log("Scene created");
+
+    // Create sunset gradient using a large sphere
+    const sunsetGradient = new THREE.Mesh(
+      new THREE.SphereGeometry(50, 32, 32),
+      new THREE.ShaderMaterial({
+        side: THREE.BackSide,
+        uniforms: {
+          topColor: { value: new THREE.Color(0x87ceeb) }, // Soft light blue at top
+          horizonColor: { value: new THREE.Color(0xffb3d9) }, // Pastel pink at horizon
+          bottomColor: { value: new THREE.Color(0xffd4a3) }, // Soft peach at bottom
+        },
+        vertexShader: `
+          varying vec3 vWorldPosition;
+          void main() {
+            vec4 worldPosition = modelMatrix * vec4(position, 1.0);
+            vWorldPosition = worldPosition.xyz;
+            gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+          }
+        `,
+        fragmentShader: `
+          uniform vec3 topColor;
+          uniform vec3 horizonColor;
+          uniform vec3 bottomColor;
+          varying vec3 vWorldPosition;
+
+          void main() {
+            float h = normalize(vWorldPosition).y;
+
+            // Blend from bottom to horizon to top
+            vec3 color;
+            if (h > 0.0) {
+              // Above horizon: blend from horizon to top
+              color = mix(horizonColor, topColor, smoothstep(0.0, 0.5, h));
+            } else {
+              // Below horizon: blend from bottom to horizon
+              color = mix(bottomColor, horizonColor, smoothstep(-0.3, 0.0, h));
+            }
+
+            gl_FragColor = vec4(color, 1.0);
+          }
+        `,
+      })
+    );
+    scene.add(sunsetGradient);
+    console.log("Scene created with sunset sky");
 
     // Create camera
     const camera = new THREE.PerspectiveCamera(
