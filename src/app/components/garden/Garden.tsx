@@ -11,6 +11,7 @@ import {
   animatePollenParticles,
 } from "./scene/Particles";
 import { createOcean, animateOcean } from "./scene/Ocean";
+import { createMountains } from "./scene/Mountains";
 
 export default function Garden() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -112,6 +113,11 @@ export default function Garden() {
     ground.receiveShadow = true;
     scene.add(ground);
     console.log("Ground plane added");
+
+    // Create and add mountains (in background, before ocean)
+    const mountains = createMountains();
+    scene.add(mountains);
+    console.log("Mountains added");
 
     // Create and add ocean in the distance
     const ocean = createOcean();
