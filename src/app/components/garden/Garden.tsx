@@ -293,7 +293,7 @@ export default function Garden() {
   return (
     <div
       ref={containerRef}
-      className="w-full h-screen fixed top-0 left-0"
+      className="w-full h-screen fixed top-0 left-0 overflow-hidden"
       style={{ margin: 0, padding: 0 }}
     />
   );
