@@ -31,7 +31,7 @@ export function createMountains(): THREE.Group {
       baseY: -10,
       maxHeight: 22,
       xPosition: -29,
-      opacity: 0.7,
+      opacity: 0.6,
       color: 0x475569, // slate-600
     },
     // Additional mountain range to fill the left sky area

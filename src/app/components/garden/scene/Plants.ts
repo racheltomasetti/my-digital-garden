@@ -78,66 +78,80 @@ function getRandomPosition(
   return null;
 }
 
+// Fibonacci spiral position generator
+const GOLDEN_ANGLE = 2.399; // ≈137.5° in radians
+const LIGHTHOUSE_X = -2;
+const LIGHTHOUSE_Z = -2;
+const SPIRAL_START_RADIUS = 4.0;
+
+function getSpiralPosition(
+  index: number,
+  scalingConstant: number,
+  minDistance: number,
+  existingPositions: { x: number; z: number }[],
+  jitterAmount: number = 0.4,
+  blockViewPath: boolean = false
+): { x: number; z: number } | null {
+  // Calculate base spiral position
+  const angle = index * GOLDEN_ANGLE;
+  const radius = SPIRAL_START_RADIUS + scalingConstant * Math.sqrt(index);
+
+  // Add random jitter for organic feel
+  const jitterX = (Math.random() - 0.5) * jitterAmount;
+  const jitterZ = (Math.random() - 0.5) * jitterAmount;
+
+  const x = LIGHTHOUSE_X + Math.cos(angle) * radius + jitterX;
+  const z = LIGHTHOUSE_Z + Math.sin(angle) * radius + jitterZ;
+
+  // Check bounds
+  if (x < -12 || x > 12 || z < -12 || z > 12) {
+    return null;
+  }
+
+  // Check if position is valid
+  if (isValidPosition(x, z, minDistance, existingPositions, blockViewPath)) {
+    return { x, z };
+  }
+
+  return null;
+}
+
 export function populateGarden(scene: THREE.Scene): THREE.Object3D[] {
   const plants: THREE.Object3D[] = [];
   const positions: { x: number; z: number }[] = [];
 
-  // Yellow Rose Garden - create abundant clusters around lighthouse
-  const roseCount = 45; // Much more roses for lush look
+  // Yellow Rose Garden - three rings around lighthouse
+  const rosesPerRing = 11;
   const lighthouseX = -2;
   const lighthouseZ = -2;
+  const roseRadii = [2.2, 2.9, 3.6]; // Three rings
 
-  for (let i = 0; i < roseCount; i++) {
-    const rose = createYellowRose();
+  for (let ring = 0; ring < roseRadii.length; ring++) {
+    const radius = roseRadii[ring];
+    const angleOffset = ring * 0.3; // Offset each ring slightly
 
-    // Create roses in multiple rings and clusters
-    const ring = Math.floor(i / 12); // 12 roses per ring
-    const angleOffset = ring * 0.4; // Offset each ring
-    const radius = 1.8 + ring * 0.6; // Tighter, more rings
-    const angle = (i * Math.PI * 2) / 12 + angleOffset;
+    for (let i = 0; i < rosesPerRing; i++) {
+      const rose = createYellowRose();
 
-    const x = lighthouseX + Math.cos(angle) * radius + (Math.random() - 0.5) * 0.3;
-    const z = lighthouseZ + Math.sin(angle) * radius + (Math.random() - 0.5) * 0.3;
+      const angle = (i * Math.PI * 2) / rosesPerRing + angleOffset;
+      const x = lighthouseX + Math.cos(angle) * radius + (Math.random() - 0.5) * 0.2;
+      const z = lighthouseZ + Math.sin(angle) * radius + (Math.random() - 0.5) * 0.2;
 
-    rose.position.set(x, 0, z);
-    rose.rotation.y = Math.random() * Math.PI * 2;
-    rose.scale.set(1, 0.9 + Math.random() * 0.2, 1); // Vary height slightly
+      rose.position.set(x, 0, z);
+      rose.rotation.y = Math.random() * Math.PI * 2;
+      rose.scale.set(1, 0.9 + Math.random() * 0.2, 1); // Vary height slightly
 
-    scene.add(rose);
-    plants.push(rose);
-    positions.push({ x, z });
-  }
-
-  // Trees (15-18 trees scattered around, not blocking camera view)
-  const treeCount = 18;
-  for (let i = 0; i < treeCount; i++) {
-    const pos = getRandomPosition(-12, 12, -12, 12, 1.5, positions, true); // Block view path
-    if (pos) {
-      const height = 2.0 + Math.random() * 1.5;
-      const tree = createTree(height);
-      tree.position.set(pos.x, 0, pos.z);
-      tree.rotation.y = Math.random() * Math.PI * 2;
-      scene.add(tree);
-      plants.push(tree);
-      positions.push(pos);
+      scene.add(rose);
+      plants.push(rose);
+      positions.push({ x, z });
     }
   }
 
-  // Bushes (30-35 bushes for fullness)
-  const bushCount = 35;
-  for (let i = 0; i < bushCount; i++) {
-    const pos = getRandomPosition(-12, 12, -12, 12, 0.8, positions);
-    if (pos) {
-      const size = 0.5 + Math.random() * 0.7;
-      const bush = createBush(size);
-      bush.position.set(pos.x, 0, pos.z);
-      scene.add(bush);
-      plants.push(bush);
-      positions.push(pos);
-    }
-  }
+  // Now place plants in spiral pattern (flowers, bushes, trees, rocks)
+  // Using a shared spiral index counter for natural distribution
+  let spiralIndex = 0;
 
-  // Other colorful flowers (50+ flowers in abundant clusters)
+  // Other colorful flowers (middle rings of spiral)
   const flowerColors = [
     0xff69b4, // Pink
     0xda70d6, // Orchid
@@ -149,8 +163,11 @@ export function populateGarden(scene: THREE.Scene): THREE.Object3D[] {
   ];
 
   const flowerCount = 60;
-  for (let i = 0; i < flowerCount; i++) {
-    const pos = getRandomPosition(-12, 12, -12, 12, 0.4, positions);
+  let flowersPlaced = 0;
+  while (flowersPlaced < flowerCount && spiralIndex < 500) {
+    const pos = getSpiralPosition(spiralIndex, 0.35, 0.4, positions);
+    spiralIndex++;
+
     if (pos) {
       const color = flowerColors[Math.floor(Math.random() * flowerColors.length)];
       const flower = createFlower(color);
@@ -159,13 +176,77 @@ export function populateGarden(scene: THREE.Scene): THREE.Object3D[] {
       scene.add(flower);
       plants.push(flower);
       positions.push(pos);
+      flowersPlaced++;
     }
   }
 
-  // Rocks (20-25 rocks)
+  // Bushes scattered throughout spiral (all ranges) - place some before and after trees
+  const totalBushCount = 35;
+  const bushesBeforeTrees = Math.floor(totalBushCount * 0.6); // 60% before trees
+  const bushesAfterTrees = totalBushCount - bushesBeforeTrees; // 40% after trees
+
+  let bushesPlaced = 0;
+  let bushSpiralIndex = 0;
+
+  // Place first batch of bushes
+  while (bushesPlaced < bushesBeforeTrees && bushSpiralIndex < 500) {
+    const pos = getSpiralPosition(bushSpiralIndex, 0.35, 0.8, positions);
+    bushSpiralIndex++;
+
+    if (pos) {
+      const size = 0.5 + Math.random() * 0.7;
+      const bush = createBush(size);
+      bush.position.set(pos.x, 0, pos.z);
+      scene.add(bush);
+      plants.push(bush);
+      positions.push(pos);
+      bushesPlaced++;
+    }
+  }
+
+  // Trees on outer rings (avoiding camera view path)
+  const treeCount = 18;
+  let treesPlaced = 0;
+  while (treesPlaced < treeCount && spiralIndex < 500) {
+    const pos = getSpiralPosition(spiralIndex, 0.4, 1.5, positions, 0.4, true);
+    spiralIndex++;
+
+    if (pos) {
+      const height = 2.0 + Math.random() * 1.5;
+      const tree = createTree(height);
+      tree.position.set(pos.x, 0, pos.z);
+      tree.rotation.y = Math.random() * Math.PI * 2;
+      scene.add(tree);
+      plants.push(tree);
+      positions.push(pos);
+      treesPlaced++;
+    }
+  }
+
+  // Place remaining bushes after trees (on outer rings)
+  while (bushesPlaced < totalBushCount && spiralIndex < 500) {
+    const pos = getSpiralPosition(spiralIndex, 0.4, 0.8, positions);
+    spiralIndex++;
+
+    if (pos) {
+      const size = 0.5 + Math.random() * 0.7;
+      const bush = createBush(size);
+      bush.position.set(pos.x, 0, pos.z);
+      scene.add(bush);
+      plants.push(bush);
+      positions.push(pos);
+      bushesPlaced++;
+    }
+  }
+
+  // Rocks scattered throughout spiral
   const rockCount = 25;
-  for (let i = 0; i < rockCount; i++) {
-    const pos = getRandomPosition(-12, 12, -12, 12, 0.6, positions);
+  let rocksPlaced = 0;
+  let rockSpiralIndex = 5; // Offset slightly from flowers
+  while (rocksPlaced < rockCount && rockSpiralIndex < 500) {
+    const pos = getSpiralPosition(rockSpiralIndex, 0.35, 0.6, positions);
+    rockSpiralIndex++;
+
     if (pos) {
       const size = 0.2 + Math.random() * 0.6;
       const rock = createRock(size);
@@ -177,6 +258,7 @@ export function populateGarden(scene: THREE.Scene): THREE.Object3D[] {
       );
       scene.add(rock);
       positions.push(pos);
+      rocksPlaced++;
     }
   }
 
