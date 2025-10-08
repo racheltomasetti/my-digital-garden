@@ -22,7 +22,7 @@ export default function StoryPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-300 to-orange-200">
+    <div className="min-h-screen bg-gradient-to-t from-slate-900 via-slate-800 to-slate-700">
       <Navigation />
 
       {/* Top section - NOW */}
@@ -36,7 +36,7 @@ export default function StoryPage() {
       </section>
 
       {/* Middle section - Timeline */}
-      <section className="min-h-screen px-8 flex items-center justify-center bg-white/10 backdrop-blur-sm">
+      <section className="min-h-screen px-8 flex items-center justify-center">
         <div className="max-w-4xl">
           <h2 className="text-5xl font-bold text-white mb-8">The Journey</h2>
         </div>

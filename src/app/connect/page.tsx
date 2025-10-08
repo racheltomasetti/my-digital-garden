@@ -4,12 +4,12 @@ import Navigation from "@/app/components/Navigation";
 
 export default function ConnectPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-sky-300 to-orange-200">
+    <div className="min-h-screen bg-gradient-to-b from-slate-800 via-slate-700 to-slate-900">
       <Navigation />
 
       <section className="min-h-screen pt-24 px-8 flex items-center justify-center">
         <div className="max-w-4xl">
-          <h1 className="text-6xl font-bold text-white mb-8">Connect</h1>
+          <h1 className="text-6xl font-bold text-white mb-8">CONNECT</h1>
           {/* <div className="text-white text-xl space-y-6">
             <p>
               Let&apos;s connect! This is where you can reach out to Ray.
