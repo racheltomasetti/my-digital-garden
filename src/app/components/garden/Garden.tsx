@@ -4,7 +4,12 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { createLighthouse } from "./scene/Lighthouse";
 import { populateGarden } from "./scene/Plants";
-import { createButterflies, createPollenParticles, animateButterflies, animatePollenParticles } from "./scene/Particles";
+import {
+  createButterflies,
+  createPollenParticles,
+  animateButterflies,
+  animatePollenParticles,
+} from "./scene/Particles";
 import { createOcean, animateOcean } from "./scene/Ocean";
 
 export default function Garden() {
@@ -85,8 +90,8 @@ export default function Garden() {
       0.1,
       100
     );
-    camera.position.set(5, 1.6, 6);
-    camera.lookAt(0, 0, 0);
+    camera.position.set(5, 2.5, 6);
+    camera.lookAt(0, 1.5, 0);
     console.log("Camera created");
 
     // Create renderer
@@ -118,7 +123,9 @@ export default function Garden() {
     scene.add(lighthouse);
 
     // Get reference to beacon for animation
-    const beacon = lighthouse.getObjectByName("beacon") as THREE.Mesh | undefined;
+    const beacon = lighthouse.getObjectByName("beacon") as
+      | THREE.Mesh
+      | undefined;
     console.log("Lighthouse added, beacon found:", !!beacon);
 
     // Populate garden with plants
@@ -126,30 +133,35 @@ export default function Garden() {
     console.log("Garden populated");
 
     // Pre-calculate plant types for animation (avoid bbox calculation every frame)
-    let treeCount = 0, bushCount = 0, flowerCount = 0, grassCount = 0;
+    let treeCount = 0,
+      bushCount = 0,
+      flowerCount = 0,
+      grassCount = 0;
     plants.forEach((plant) => {
       const bbox = new THREE.Box3().setFromObject(plant);
       const height = bbox.max.y - bbox.min.y;
 
       if (height > 2) {
-        plant.userData.plantType = 'tree';
+        plant.userData.plantType = "tree";
         treeCount++;
       } else if (height > 1) {
-        plant.userData.plantType = 'bush';
+        plant.userData.plantType = "bush";
         bushCount++;
       } else if (height > 0.5) {
-        plant.userData.plantType = 'flower';
+        plant.userData.plantType = "flower";
         flowerCount++;
       } else {
-        plant.userData.plantType = 'grass';
+        plant.userData.plantType = "grass";
         grassCount++;
       }
     });
-    console.log(`Plant types - Trees: ${treeCount}, Bushes: ${bushCount}, Flowers: ${flowerCount}, Grass: ${grassCount}`);
+    console.log(
+      `Plant types - Trees: ${treeCount}, Bushes: ${bushCount}, Flowers: ${flowerCount}, Grass: ${grassCount}`
+    );
 
     // Create particle systems
     const butterflies = createButterflies(4);
-    butterflies.forEach(b => scene.add(b));
+    butterflies.forEach((b) => scene.add(b));
 
     const pollenParticles = createPollenParticles(25);
     scene.add(pollenParticles);
@@ -183,7 +195,14 @@ export default function Garden() {
 
       // Debug
       if (Math.floor(time) % 5 === 0 && time % 1 < 0.016) {
-        console.log("Animating at time:", time.toFixed(2), "plants count:", plants.length, "light intensity:", beaconLight.intensity.toFixed(2));
+        console.log(
+          "Animating at time:",
+          time.toFixed(2),
+          "plants count:",
+          plants.length,
+          "light intensity:",
+          beaconLight.intensity.toFixed(2)
+        );
       }
 
       // Animate lighthouse beacon (rotation and pulsing)
@@ -217,19 +236,19 @@ export default function Garden() {
 
         // Different sway for different plant types - gentle, natural movement
         switch (plantType) {
-          case 'tree':
+          case "tree":
             // Trees: slow, gentle sway
             plant.rotation.z = Math.sin(time * 0.6 + phase) * 0.08;
             break;
-          case 'bush':
+          case "bush":
             // Bushes: medium sway
             plant.rotation.z = Math.sin(time * 0.8 + phase) * 0.12;
             break;
-          case 'flower':
+          case "flower":
             // Roses and flowers: faster, more noticeable sway
             plant.rotation.z = Math.sin(time * 1.2 + phase) * 0.15;
             break;
-          case 'grass':
+          case "grass":
             // Grass: fast sway
             plant.rotation.z = Math.sin(time * 2.0 + phase) * 0.2;
             break;
@@ -258,7 +277,11 @@ export default function Garden() {
       cancelAnimationFrame(animationId);
 
       // Clean up renderer and geometries
-      if (containerRef.current && renderer.domElement && containerRef.current.contains(renderer.domElement)) {
+      if (
+        containerRef.current &&
+        renderer.domElement &&
+        containerRef.current.contains(renderer.domElement)
+      ) {
         containerRef.current.removeChild(renderer.domElement);
       }
       renderer.dispose();
