@@ -12,6 +12,7 @@ export default function Navigation() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [hasVisited, setHasVisited] = useState(true); // Default to true to avoid flash
+  const [currentHash, setCurrentHash] = useState("");
   const router = useRouter();
   const pathname = usePathname();
 
@@ -20,6 +21,32 @@ export default function Navigation() {
     const visited = localStorage.getItem(VISITED_KEY);
     setHasVisited(!!visited);
   }, []);
+
+  // Track hash changes
+  useEffect(() => {
+    const updateHash = () => {
+      // If on /story with no hash, default to #top
+      if (window.location.pathname === '/story' && !window.location.hash) {
+        setCurrentHash('#top');
+      } else {
+        setCurrentHash(window.location.hash);
+      }
+    };
+
+    // Set initial hash
+    updateHash();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', updateHash);
+
+    // Use an interval to check for hash changes (fixes Next.js router.push not triggering hashchange)
+    const intervalId = setInterval(updateHash, 100);
+
+    return () => {
+      window.removeEventListener('hashchange', updateHash);
+      clearInterval(intervalId);
+    };
+  }, [pathname]);
 
   const handleMyStoryClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -58,7 +85,7 @@ export default function Navigation() {
           {/* Left: RAY'S GARDEN logo */}
           <Link
             href="/"
-            className={`text-2xl font-bold text-white hover:text-white/80 transition-colors ${dancingScript.className}`}
+            className={`text-3xl font-bold text-white hover:text-white/80 transition-colors ${kalam.className}`}
           >
             RAY&apos;S GARDEN
           </Link>
@@ -68,27 +95,27 @@ export default function Navigation() {
             <a
               href="/story#bottom"
               onClick={handleMyStoryClick}
-              className={`text-white text-2xl hover:text-white/80 transition-colors cursor-pointer ${
-                pathname === "/story" ? "font-bold" : ""
+              className={`text-white text-3xl hover:text-white/80 transition-colors cursor-pointer ${
+                pathname === "/story" && currentHash === "#bottom" ? "font-bold" : ""
               }`}
             >
-              MY STORY
+              my story
             </a>
             <Link
               href="/story#top"
-              className={`text-white text-2xl hover:text-white/80 transition-colors ${
-                pathname === "/story" ? "font-bold" : ""
+              className={`text-white text-3xl hover:text-white/80 transition-colors ${
+                pathname === "/story" && currentHash === "#top" ? "font-bold" : ""
               }`}
             >
               NOW
             </Link>
             <Link
               href="/connect"
-              className={`text-white text-2xl hover:text-white/80 transition-colors ${
+              className={`text-white text-3xl hover:text-white/80 transition-colors ${
                 pathname === "/connect" ? "font-bold" : ""
               }`}
             >
-              CONNECT
+              connect
             </Link>
           </div>
 
@@ -114,15 +141,15 @@ export default function Navigation() {
                 handleMyStoryClick(e);
               }}
               className={`text-white hover:text-white/80 transition-colors cursor-pointer ${
-                pathname === "/story" ? "font-bold" : ""
+                pathname === "/story" && currentHash === "#bottom" ? "font-bold" : ""
               }`}
             >
-              MY STORY
+              my story
             </a>
             <Link
               href="/story#top"
               className={`text-white hover:text-white/80 transition-colors ${
-                pathname === "/story" ? "font-bold" : ""
+                pathname === "/story" && currentHash === "#top" ? "font-bold" : ""
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -135,7 +162,7 @@ export default function Navigation() {
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              CONNECT
+              connect
             </Link>
           </div>
         )}
