@@ -10,6 +10,12 @@ const caveat = Caveat({
 export const metadata: Metadata = {
   title: "pardon the construction...",
   description: "Ray's digital garden",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({
