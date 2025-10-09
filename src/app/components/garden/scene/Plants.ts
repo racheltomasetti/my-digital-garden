@@ -82,7 +82,7 @@ function getRandomPosition(
 const GOLDEN_ANGLE = 2.399; // ≈137.5° in radians
 const LIGHTHOUSE_X = -2;
 const LIGHTHOUSE_Z = -2;
-const SPIRAL_START_RADIUS = 5.1;
+const SPIRAL_START_RADIUS = 4.9;
 
 function getSpiralPosition(
   index: number,
