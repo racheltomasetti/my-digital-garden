@@ -181,7 +181,7 @@ export function populateGarden(scene: THREE.Scene): THREE.Object3D[] {
   }
 
   // Bushes scattered throughout spiral (all ranges) - place some before and after trees
-  const totalBushCount = 35;
+  const totalBushCount = 21;
   const bushesBeforeTrees = Math.floor(totalBushCount * 0.6); // 60% before trees
   const bushesAfterTrees = totalBushCount - bushesBeforeTrees; // 40% after trees
 
@@ -240,7 +240,7 @@ export function populateGarden(scene: THREE.Scene): THREE.Object3D[] {
   }
 
   // Rocks scattered throughout spiral
-  const rockCount = 25;
+  const rockCount = 16;
   let rocksPlaced = 0;
   let rockSpiralIndex = 5; // Offset slightly from flowers
   while (rocksPlaced < rockCount && rockSpiralIndex < 500) {

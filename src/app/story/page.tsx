@@ -42,7 +42,7 @@ export default function StoryPage() {
             {/* Main narrative paragraph */}
             <p className="text-xl md:text-2xl font-light">
               [This is your space to share the synthesized narrative of your complete journey.
-              What's the overarching story that connects all the chapters of your life?]
+              What&apos;s the overarching story that connects all the chapters of your life?]
             </p>
 
             {/* Key learnings section */}
@@ -69,7 +69,7 @@ export default function StoryPage() {
                 The Vision
               </h2>
               <p className="text-xl md:text-2xl font-medium italic border-l-4 border-yellow-500 pl-6 py-2">
-                [What world are you working toward? What's your big vision for the future?
+                [What world are you working toward? What&apos;s your big vision for the future?
                 This is your bold statement about the impact you want to make.]
               </p>
             </div>
