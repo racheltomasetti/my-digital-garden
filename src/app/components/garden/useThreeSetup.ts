@@ -21,8 +21,17 @@ export function useThreeSetup() {
       0.1, // Near clipping plane
       100 // Far clipping plane
     );
-    camera.position.set(5, 1.6, 10); // First-person eye level (standing height ~1.6m)
-    camera.lookAt(-2, 1.6, -2); // Look straight ahead at eye level
+
+    // Adjust camera position based on screen size
+    const isMobile = window.innerWidth < 768;
+    if (isMobile) {
+      camera.position.set(5, 2.5, 10); // Higher camera position on mobile
+      camera.lookAt(-2, 1.2, -2); // Look slightly down to center lighthouse
+    } else {
+      camera.position.set(5, 1.6, 10); // First-person eye level (standing height ~1.6m)
+      camera.lookAt(-2, 1.6, -2); // Look straight ahead at eye level
+    }
+
     cameraRef.current = camera;
 
     // Initialize renderer
@@ -38,6 +47,17 @@ export function useThreeSetup() {
     // Handle window resize
     const handleResize = () => {
       if (!cameraRef.current || !rendererRef.current) return;
+
+      const isMobile = window.innerWidth < 768;
+
+      // Update camera position on resize
+      if (isMobile) {
+        cameraRef.current.position.set(5, 2.5, 10);
+        cameraRef.current.lookAt(-2, 1.2, -2);
+      } else {
+        cameraRef.current.position.set(5, 1.6, 10);
+        cameraRef.current.lookAt(-2, 1.6, -2);
+      }
 
       cameraRef.current.aspect = window.innerWidth / window.innerHeight;
       cameraRef.current.updateProjectionMatrix();

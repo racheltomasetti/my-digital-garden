@@ -120,9 +120,9 @@ export default function Garden() {
     console.log("Mountains added");
 
     // Create and add ocean in the distance
-    const ocean = createOcean();
-    scene.add(ocean);
-    console.log("Ocean added");
+    // const ocean = createOcean();
+    // scene.add(ocean);
+    // console.log("Ocean added");
 
     // Create and add lighthouse
     const lighthouse = createLighthouse();
@@ -229,7 +229,7 @@ export default function Garden() {
       beaconLight.position.z = -2 + Math.sin(angle) * 2.0;
 
       // Animate ocean waves
-      animateOcean(ocean, time);
+      // animateOcean(ocean, time);
 
       // Animate particle systems
       animateButterflies(butterflies, time);

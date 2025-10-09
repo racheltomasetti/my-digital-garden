@@ -82,7 +82,7 @@ function getRandomPosition(
 const GOLDEN_ANGLE = 2.399; // ≈137.5° in radians
 const LIGHTHOUSE_X = -2;
 const LIGHTHOUSE_Z = -2;
-const SPIRAL_START_RADIUS = 4.0;
+const SPIRAL_START_RADIUS = 5.1;
 
 function getSpiralPosition(
   index: number,
@@ -147,38 +147,9 @@ export function populateGarden(scene: THREE.Scene): THREE.Object3D[] {
     }
   }
 
-  // Now place plants in spiral pattern (flowers, bushes, trees, rocks)
+  // Now place plants in spiral pattern (bushes, trees, rocks)
   // Using a shared spiral index counter for natural distribution
   let spiralIndex = 0;
-
-  // Other colorful flowers (middle rings of spiral)
-  const flowerColors = [
-    0xff69b4, // Pink
-    0xda70d6, // Orchid
-    0xff1493, // Deep pink
-    0xee82ee, // Violet
-    0xffa07a, // Light salmon
-    0xff6347, // Tomato red
-    0xffd700, // Gold
-  ];
-
-  const flowerCount = 60;
-  let flowersPlaced = 0;
-  while (flowersPlaced < flowerCount && spiralIndex < 500) {
-    const pos = getSpiralPosition(spiralIndex, 0.35, 0.4, positions);
-    spiralIndex++;
-
-    if (pos) {
-      const color = flowerColors[Math.floor(Math.random() * flowerColors.length)];
-      const flower = createFlower(color);
-      flower.position.set(pos.x, 0, pos.z);
-      flower.rotation.y = Math.random() * Math.PI * 2;
-      scene.add(flower);
-      plants.push(flower);
-      positions.push(pos);
-      flowersPlaced++;
-    }
-  }
 
   // Bushes scattered throughout spiral (all ranges) - place some before and after trees
   const totalBushCount = 21;
@@ -259,6 +230,35 @@ export function populateGarden(scene: THREE.Scene): THREE.Object3D[] {
       scene.add(rock);
       positions.push(pos);
       rocksPlaced++;
+    }
+  }
+
+  // Colorful flowers outside the trees (outer rings) - expand to edges
+  const flowerColors = [
+    0xff69b4, // Pink
+    0xda70d6, // Orchid
+    0xff1493, // Deep pink
+    0xee82ee, // Violet
+    0xffa07a, // Light salmon
+    0xff6347, // Tomato red
+    0xffd700, // Gold
+  ];
+
+  const flowerCount = 70;
+  let flowersPlaced = 0;
+  while (flowersPlaced < flowerCount && spiralIndex < 800) {
+    const pos = getSpiralPosition(spiralIndex, 0.5, 0.4, positions);
+    spiralIndex++;
+
+    if (pos) {
+      const color = flowerColors[Math.floor(Math.random() * flowerColors.length)];
+      const flower = createFlower(color);
+      flower.position.set(pos.x, 0, pos.z);
+      flower.rotation.y = Math.random() * Math.PI * 2;
+      scene.add(flower);
+      plants.push(flower);
+      positions.push(pos);
+      flowersPlaced++;
     }
   }
 
