@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 
 type Theme = "dark" | "light";
 
@@ -14,6 +15,8 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
   const [mounted, setMounted] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   // Initialize theme from localStorage or default to dark
   useEffect(() => {
@@ -38,7 +41,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  // Keyboard listener for "D" key
+  // Keyboard listener for "D" key (theme toggle)
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       // Only toggle if not typing in an input/textarea
@@ -59,6 +62,33 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
+
+  // Keyboard listener for "S" key (navigation toggle)
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      // Only navigate if not typing in an input/textarea
+      const target = event.target as HTMLElement;
+      if (
+        target.tagName === "INPUT" ||
+        target.tagName === "TEXTAREA" ||
+        target.isContentEditable
+      ) {
+        return;
+      }
+
+      if (event.key === "s" || event.key === "S") {
+        // Toggle between home and /ki
+        if (pathname === "/") {
+          router.push("/ki");
+        } else if (pathname === "/ki") {
+          router.push("/");
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [pathname, router]);
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
