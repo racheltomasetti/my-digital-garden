@@ -2,6 +2,7 @@ import * as THREE from "three";
 
 export function createLighthouse(): THREE.Group {
   const lighthouse = new THREE.Group();
+  lighthouse.userData.clickable = true;
 
   // Base platform (stone gray)
   const baseGeometry = new THREE.CylinderGeometry(0.7, 0.7, 0.3, 8);

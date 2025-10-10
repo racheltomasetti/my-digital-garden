@@ -10,8 +10,8 @@ export default function KIPage() {
 
       {/* Title*/}
       <section className="pt-24 px-8 pb-12">
-        <h1 className="text-6xl md:text-7xl font-bold mb-6 mt-6 ${kalam.className}">
-          KI
+        <h1 className="text-6xl md:text-7xl font-bold mb-6 mt-6 ${kalam.className} text-center">
+          {/* KI */}
         </h1>
       </section>
 

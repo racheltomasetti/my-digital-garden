@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { createLighthouse } from "./scene/Lighthouse";
 import { populateGarden } from "./scene/Plants";
@@ -12,9 +12,11 @@ import {
 } from "./scene/Particles";
 import { createOcean, animateOcean } from "./scene/Ocean";
 import { createMountains } from "./scene/Mountains";
+import MissionModal from "@/app/components/MissionModal";
 
 export default function Garden() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (!containerRef.current) {
@@ -274,10 +276,67 @@ export default function Garden() {
     };
     window.addEventListener("resize", handleResize);
 
+    // Handle clicks on lighthouse (raycaster for 3D object picking)
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    const handleClick = (event: MouseEvent) => {
+      // Calculate mouse position in normalized device coordinates (-1 to +1)
+      mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+      mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+
+      // Update raycaster with camera and mouse position
+      raycaster.setFromCamera(mouse, camera);
+
+      // Check for intersections with all objects in the scene
+      const intersects = raycaster.intersectObjects(scene.children, true);
+
+      if (intersects.length > 0) {
+        // Check if any intersected object or its parent is the lighthouse
+        for (const intersect of intersects) {
+          let obj: THREE.Object3D | null = intersect.object;
+
+          // Traverse up the parent chain to find clickable objects
+          while (obj) {
+            if (obj.userData.clickable) {
+              // Trigger lighthouse glow effect
+              const lighthouseMeshes = lighthouse.children.filter(
+                (child) => child instanceof THREE.Mesh
+              ) as THREE.Mesh[];
+
+              lighthouseMeshes.forEach((mesh) => {
+                const material = mesh.material as THREE.MeshStandardMaterial;
+                const originalEmissive = material.emissive?.clone() || new THREE.Color(0x000000);
+                const originalIntensity = material.emissiveIntensity || 0;
+
+                // Set glow
+                material.emissive = new THREE.Color(0xffffaa);
+                material.emissiveIntensity = 0.3;
+
+                // Reset after brief moment
+                setTimeout(() => {
+                  material.emissive = originalEmissive;
+                  material.emissiveIntensity = originalIntensity;
+                }, 200);
+              });
+
+              // Open modal
+              setIsModalOpen(true);
+              return;
+            }
+            obj = obj.parent;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("click", handleClick);
+
     // Cleanup
     return () => {
       console.log("Cleaning up garden");
       window.removeEventListener("resize", handleResize);
+      window.removeEventListener("click", handleClick);
       document.removeEventListener("wheel", preventZoom);
       document.removeEventListener("touchmove", preventZoom);
       cancelAnimationFrame(animationId);
@@ -297,10 +356,16 @@ export default function Garden() {
   }, []);
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full h-screen fixed top-0 left-0 overflow-hidden"
-      style={{ margin: 0, padding: 0 }}
-    />
+    <>
+      <div
+        ref={containerRef}
+        className="w-full h-screen fixed top-0 left-0 overflow-hidden"
+        style={{ margin: 0, padding: 0 }}
+      />
+      <MissionModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 }
