@@ -9,7 +9,7 @@ export default function KIPage() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="pt-24 px-8 pb-12">
+      {/* <section className="pt-24 px-8 pb-12">
         <div className="max-w-6xl mx-auto" style={{ color: "var(--tx)" }}>
           <h1
             className={`text-6xl md:text-7xl font-bold mb-6 mt-6 ${kalam.className}`}
@@ -22,7 +22,7 @@ export default function KIPage() {
             [to live in the now]
           </p>
         </div>
-      </section>
+      </section> */}
 
       {/* Toolkit Categories */}
       {/*  */}
