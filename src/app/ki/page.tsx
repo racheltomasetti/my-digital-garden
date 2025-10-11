@@ -11,9 +11,15 @@ export default function KIPage() {
       {/* Title*/}
       <section className="pt-24 px-8 pb-12">
         <h1 className="text-6xl md:text-7xl font-bold mb-6 mt-6 ${kalam.className} text-center">
-          {/* KI */}
-        </h1>
+          KI
+        </h1>{" "}
+        <h2 className="text-2xl md:text-3xl font-light max-w-3xl ${notoSans.className} text-center">
+          Building your personalized AI Self Toolkit
+        </h2>
       </section>
+
+      {/* toolkit */}
+      {/* on building ki */}
 
       {/* Hero Section */}
       {/* <section className="pt-24 px-8 pb-12">
