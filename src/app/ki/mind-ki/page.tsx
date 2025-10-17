@@ -4,7 +4,6 @@ import Navigation from "@/app/components/Navigation";
 import { kalam, notoSans } from "@/app/fonts";
 
 export default function MindKIPage() {
-
   return (
     <div className="min-h-screen" style={{ background: "var(--bg)" }}>
       <Navigation />
@@ -60,7 +59,7 @@ export default function MindKIPage() {
           className={`text-xl mt-4 ${notoSans.className}`}
           style={{ color: "var(--tx-2)" }}
         >
-          The digital garden you're currently exploring
+          The digital garden you&apos;re currently exploring
         </p>
       </section>
 
@@ -78,8 +77,8 @@ export default function MindKIPage() {
         >
           <p>
             For years, I consumed content. I learned, I absorbed, I took in vast
-            amounts of information. But I wasn&apos;t creating. I wasn&apos;t sharing. The
-            knowledge stayed internal.
+            amounts of information. But I wasn&apos;t creating. I wasn&apos;t
+            sharing. The knowledge stayed internal.
           </p>
           <p>
             I realized that building in public—sharing the journey, the process,
@@ -110,9 +109,9 @@ export default function MindKIPage() {
         >
           <p>
             mind-ki is a digital garden—a living space where ideas grow, evolve,
-            and interconnect. It&apos;s not a blog with finished thoughts. It&apos;s a
-            garden where thoughts are planted, tended, and allowed to develop
-            organically over time.
+            and interconnect. It&apos;s not a blog with finished thoughts.
+            It&apos;s a garden where thoughts are planted, tended, and allowed
+            to develop organically over time.
           </p>
           <p className="font-bold" style={{ color: "var(--accent)" }}>
             What this space offers:
@@ -418,9 +417,10 @@ export default function MindKIPage() {
             className={`text-2xl leading-relaxed ${kalam.className}`}
             style={{ color: "var(--tx)" }}
           >
-            This page is self-referential. You&apos;re reading about the garden while
-            being in the garden. That&apos;s the magic of digital spaces—they can
-            reflect on themselves. They can be both the medium and the message.
+            This page is self-referential. You&apos;re reading about the garden
+            while being in the garden. That&apos;s the magic of digital
+            spaces—they can reflect on themselves. They can be both the medium
+            and the message.
           </p>
         </div>
       </section>

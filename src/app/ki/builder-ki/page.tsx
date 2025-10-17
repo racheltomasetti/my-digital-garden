@@ -16,7 +16,10 @@ export default function BuilderKIPage() {
         <div className="max-w-4xl mx-auto">
           <div
             className="w-full aspect-video rounded-lg overflow-hidden flex items-center justify-center"
-            style={{ backgroundColor: "var(--ui)", border: "2px solid var(--accent)" }}
+            style={{
+              backgroundColor: "var(--ui)",
+              border: "2px solid var(--accent)",
+            }}
           >
             <div className="text-center space-y-4 p-8">
               <span
@@ -70,16 +73,18 @@ export default function BuilderKIPage() {
           style={{ color: "var(--tx)" }}
         >
           <p>
-            The problem was clear: I was working with AI tools to build, but I wasn't building
-            with intentionality. Every session started from scratch. Context was lost. Learnings
-            evaporated into the ether.
+            The problem was clear: I was working with AI tools to build, but I
+            wasn&apos;t building with intentionality. Every session started from
+            scratch. Context was lost. Learnings evaporated into the ether.
           </p>
           <p>
-            I needed a system—a way to synthesize the journey, capture the context, and build
-            with purpose. Not just for me, but for anyone who wants to build better with AI.
+            I needed a system—a way to synthesize the journey, capture the
+            context, and build with purpose. Not just for me, but for anyone who
+            wants to build better with AI.
           </p>
           <p>
-            builder-ki is the answer to that need. It's the system I wished I had from day one.
+            builder-ki is the answer to that need. It&apos;s the system I wished
+            I had from day one.
           </p>
         </div>
       </section>
@@ -97,9 +102,9 @@ export default function BuilderKIPage() {
           style={{ color: "var(--tx)" }}
         >
           <p>
-            builder-ki is a tool that extends your learning journey. It helps you synthesize
-            context from your building sessions and create intentional documentation that grows
-            with your project.
+            builder-ki is a tool that extends your learning journey. It helps
+            you synthesize context from your building sessions and create
+            intentional documentation that grows with your project.
           </p>
           <p className="font-bold" style={{ color: "var(--accent)" }}>
             The Vision:
@@ -107,11 +112,16 @@ export default function BuilderKIPage() {
           <ul className="space-y-2 pl-6">
             <li className="flex items-start gap-3">
               <span style={{ color: "var(--accent)" }}>•</span>
-              <span>Capture learnings and context in real-time as you build</span>
+              <span>
+                Capture learnings and context in real-time as you build
+              </span>
             </li>
             <li className="flex items-start gap-3">
               <span style={{ color: "var(--accent)" }}>•</span>
-              <span>Generate living documentation that reflects your current understanding</span>
+              <span>
+                Generate living documentation that reflects your current
+                understanding
+              </span>
             </li>
             <li className="flex items-start gap-3">
               <span style={{ color: "var(--accent)" }}>•</span>
@@ -119,7 +129,9 @@ export default function BuilderKIPage() {
             </li>
             <li className="flex items-start gap-3">
               <span style={{ color: "var(--accent)" }}>•</span>
-              <span>Share your process so others can learn from your workflow</span>
+              <span>
+                Share your process so others can learn from your workflow
+              </span>
             </li>
           </ul>
         </div>
@@ -143,7 +155,13 @@ export default function BuilderKIPage() {
               Tech Stack
             </h3>
             <div className="flex flex-wrap gap-3">
-              {["Next.js", "TypeScript", "React", "Tailwind CSS", "OpenAI API"].map((tech) => (
+              {[
+                "Next.js",
+                "TypeScript",
+                "React",
+                "Tailwind CSS",
+                "OpenAI API",
+              ].map((tech) => (
                 <span
                   key={tech}
                   className={`px-4 py-2 rounded-lg ${notoSans.className}`}
@@ -203,8 +221,9 @@ export default function BuilderKIPage() {
                   1.
                 </span>
                 <p>
-                  <strong>Build:</strong> Work on the project using AI tools (Claude Code, Cursor)
-                  to write code, solve problems, and iterate on features.
+                  <strong>Build:</strong> Work on the project using AI tools
+                  (Claude Code, Cursor) to write code, solve problems, and
+                  iterate on features.
                 </p>
               </div>
               <div className="flex items-start gap-4">
@@ -212,8 +231,9 @@ export default function BuilderKIPage() {
                   2.
                 </span>
                 <p>
-                  <strong>Capture:</strong> Document key decisions, learnings, and insights in
-                  real-time using builder-ki's context capture system.
+                  <strong>Capture:</strong> Document key decisions, learnings,
+                  and insights in real-time using builder-ki&apos;s context
+                  capture system.
                 </p>
               </div>
               <div className="flex items-start gap-4">
@@ -221,8 +241,9 @@ export default function BuilderKIPage() {
                   3.
                 </span>
                 <p>
-                  <strong>Synthesize:</strong> Use AI to transform raw notes into structured
-                  documentation that reflects current understanding.
+                  <strong>Synthesize:</strong> Use AI to transform raw notes
+                  into structured documentation that reflects current
+                  understanding.
                 </p>
               </div>
               <div className="flex items-start gap-4">
@@ -230,8 +251,9 @@ export default function BuilderKIPage() {
                   4.
                 </span>
                 <p>
-                  <strong>Iterate:</strong> Continuously refine and update the documentation as
-                  the project evolves and understanding deepens.
+                  <strong>Iterate:</strong> Continuously refine and update the
+                  documentation as the project evolves and understanding
+                  deepens.
                 </p>
               </div>
             </div>
@@ -250,13 +272,15 @@ export default function BuilderKIPage() {
               style={{ color: "var(--tx)" }}
             >
               <p>
-                This isn't just a tool—it's a philosophy. The system is about creating a feedback
-                loop between building and learning. Every line of code teaches you something.
-                Every bug reveals a pattern. Every feature expands your mental model.
+                This isn&apos;t just a tool—it&apos;s a philosophy. The system
+                is about creating a feedback loop between building and learning.
+                Every line of code teaches you something. Every bug reveals a
+                pattern. Every feature expands your mental model.
               </p>
               <p>
-                builder-ki captures all of that and transforms it into knowledge you can revisit,
-                refine, and share with others who are on the same journey.
+                builder-ki captures all of that and transforms it into knowledge
+                you can revisit, refine, and share with others who are on the
+                same journey.
               </p>
             </div>
           </div>
@@ -301,9 +325,10 @@ export default function BuilderKIPage() {
             Key Learnings:
           </p>
           <p>
-            Building builder-ki has reinforced the importance of intentional documentation.
-            The best documentation isn't written after the fact—it grows organically as you build.
-            This project is proof of concept for that philosophy.
+            Building builder-ki has reinforced the importance of intentional
+            documentation. The best documentation isn&apos;t written after the
+            fact—it grows organically as you build. This project is proof of
+            concept for that philosophy.
           </p>
 
           <p className="font-bold pt-6" style={{ color: "var(--accent)" }}>
@@ -338,7 +363,10 @@ export default function BuilderKIPage() {
           {/* Screenshot Placeholder 1 */}
           <div
             className="w-full aspect-video rounded-lg overflow-hidden flex items-center justify-center"
-            style={{ backgroundColor: "var(--ui)", border: "1px solid var(--accent)" }}
+            style={{
+              backgroundColor: "var(--ui)",
+              border: "1px solid var(--accent)",
+            }}
           >
             <span
               className={`text-xl ${notoSans.className}`}
@@ -351,7 +379,10 @@ export default function BuilderKIPage() {
           {/* Screenshot Placeholder 2 */}
           <div
             className="w-full aspect-video rounded-lg overflow-hidden flex items-center justify-center"
-            style={{ backgroundColor: "var(--ui)", border: "1px solid var(--accent)" }}
+            style={{
+              backgroundColor: "var(--ui)",
+              border: "1px solid var(--accent)",
+            }}
           >
             <span
               className={`text-xl ${notoSans.className}`}
