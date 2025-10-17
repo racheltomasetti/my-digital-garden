@@ -2,10 +2,8 @@
 
 import Navigation from "@/app/components/Navigation";
 import { kalam, notoSans } from "@/app/fonts";
-import { useTheme } from "@/app/contexts/ThemeContext";
 
 export default function CycleKIPage() {
-  const { theme } = useTheme();
 
   return (
     <div className="min-h-screen" style={{ background: "var(--bg)" }}>
@@ -81,10 +79,10 @@ export default function CycleKIPage() {
           <p>
             The pain point is real: I wanted an expert I could talk to anytime. Someone who knew
             my patterns, understood my questions, and could provide evidence-based guidance without
-            judgment. That expert didn't exist.
+            judgment. That expert didn&apos;t exist.
           </p>
           <p className="font-bold" style={{ color: "var(--accent)" }}>
-            So I'm building it.
+            So I&apos;m building it.
           </p>
         </div>
       </section>
@@ -142,7 +140,7 @@ export default function CycleKIPage() {
             </li>
           </ul>
           <p className="pt-4">
-            This isn't just another cycle tracker. It's an expert companion that meets you where
+            This isn&apos;t just another cycle tracker. It&apos;s an expert companion that meets you where
             you are and helps you understand the incredible complexity and wisdom of your body.
           </p>
         </div>
@@ -278,9 +276,9 @@ export default function CycleKIPage() {
                 The AI needs to be clinically accurate while also being empathetic and accessible.
               </p>
               <p>
-                I'm using RAG (Retrieval-Augmented Generation) to ground responses in verified
-                medical literature. I'm using careful prompt engineering to ensure the tone is
-                supportive and non-judgmental. And I'm building with privacy and safety as
+                I&apos;m using RAG (Retrieval-Augmented Generation) to ground responses in verified
+                medical literature. I&apos;m using careful prompt engineering to ensure the tone is
+                supportive and non-judgmental. And I&apos;m building with privacy and safety as
                 foundational principles.
               </p>
               <p>
@@ -334,8 +332,8 @@ export default function CycleKIPage() {
             Key Learnings So Far:
           </p>
           <p>
-            The more I research, the more I understand how critical this tool could be. There's
-            a massive gap between the information people need and what's currently accessible.
+            The more I research, the more I understand how critical this tool could be. There&apos;s
+            a massive gap between the information people need and what&apos;s currently accessible.
             Building this right means taking the time to do thorough research and get the
             foundation solid before rushing to code.
           </p>

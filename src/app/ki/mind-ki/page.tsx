@@ -2,10 +2,8 @@
 
 import Navigation from "@/app/components/Navigation";
 import { kalam, notoSans } from "@/app/fonts";
-import { useTheme } from "@/app/contexts/ThemeContext";
 
 export default function MindKIPage() {
-  const { theme } = useTheme();
 
   return (
     <div className="min-h-screen" style={{ background: "var(--bg)" }}>
@@ -80,7 +78,7 @@ export default function MindKIPage() {
         >
           <p>
             For years, I consumed content. I learned, I absorbed, I took in vast
-            amounts of information. But I wasn't creating. I wasn't sharing. The
+            amounts of information. But I wasn&apos;t creating. I wasn&apos;t sharing. The
             knowledge stayed internal.
           </p>
           <p>
@@ -112,7 +110,7 @@ export default function MindKIPage() {
         >
           <p>
             mind-ki is a digital garden—a living space where ideas grow, evolve,
-            and interconnect. It's not a blog with finished thoughts. It's a
+            and interconnect. It&apos;s not a blog with finished thoughts. It&apos;s a
             garden where thoughts are planted, tended, and allowed to develop
             organically over time.
           </p>
@@ -153,8 +151,8 @@ export default function MindKIPage() {
             </li>
           </ul>
           <p className="pt-4">
-            This garden is meta—it's a project that documents all the other
-            projects. It's the connective tissue between the work.
+            This garden is meta—it&apos;s a project that documents all the other
+            projects. It&apos;s the connective tissue between the work.
           </p>
         </div>
       </section>
@@ -328,7 +326,7 @@ export default function MindKIPage() {
           style={{ color: "var(--tx)" }}
         >
           <p className="font-bold" style={{ color: "var(--accent)" }}>
-            What's Built:
+            What&apos;s Built:
           </p>
           <ul className="space-y-2 pl-6">
             <li className="flex items-start gap-3">
@@ -380,7 +378,7 @@ export default function MindKIPage() {
           </p>
 
           <p className="font-bold pt-6" style={{ color: "var(--accent)" }}>
-            What's Next:
+            What&apos;s Next:
           </p>
           <ul className="space-y-2 pl-6">
             <li className="flex items-start gap-3">
@@ -420,8 +418,8 @@ export default function MindKIPage() {
             className={`text-2xl leading-relaxed ${kalam.className}`}
             style={{ color: "var(--tx)" }}
           >
-            This page is self-referential. You're reading about the garden while
-            being in the garden. That's the magic of digital spaces—they can
+            This page is self-referential. You&apos;re reading about the garden while
+            being in the garden. That&apos;s the magic of digital spaces—they can
             reflect on themselves. They can be both the medium and the message.
           </p>
         </div>
