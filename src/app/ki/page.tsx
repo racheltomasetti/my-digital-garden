@@ -145,7 +145,7 @@ export default function KIPage() {
         projectName="KI"
         demoNumber={1}
         githubUrl="https://github.com/racheltomasetti/builder-ki"
-        timestamp="Ocotber 17, 2025 ~ 1:42 AM EST"
+        timestamp="October 17, 2025 ~ 1:42 AM EST"
         blurb="you can tell how badly i need sleep by the fact i said august 17, 2025 and didn't bat an eye"
         webVideoSrc="/demos/ki-web-demo1.mp4"
         mobileVideoSrc="/demos/ki-mobile-demo1.mov"
