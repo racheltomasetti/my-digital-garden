@@ -1,28 +1,13 @@
 "use client";
 
 import { useRef } from "react";
-import Link from "next/link";
 import Navigation from "@/app/components/Navigation";
 import { kalam, notoSans } from "@/app/fonts";
 import TextType from "@/components/TextType";
-import { useTheme } from "@/app/contexts/ThemeContext";
-import ProfileCard from "@/components/ProfileCard";
 import DemoShowcase from "@/app/components/DemoShowcase";
 
 export default function KIPage() {
-  const { theme } = useTheme();
   const connectSectionRef = useRef<HTMLElement>(null);
-
-  // Define theme-aware colors for the TextType component
-  const textColors = theme === "dark" ? ["var(--tx)"] : ["var(--tx)"];
-
-  // Scroll to connect section
-  const scrollToConnect = () => {
-    connectSectionRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  };
 
   return (
     <div className="min-h-screen" style={{ background: "var(--bg)" }}>
@@ -182,7 +167,7 @@ export default function KIPage() {
             className={`text-5xl md:text-6xl font-bold ${kalam.className}`}
             style={{ color: "var(--accent)" }}
           >
-            let's build together.
+            let&apos;s build together.
           </h2>
 
           {/* Email */}

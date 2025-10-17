@@ -68,8 +68,8 @@ export default function StoryPage() {
             }}
           >
             <p className={`text-2xl ${kalam.className}`}>
-              "This is a space for pull quotes, important realizations, or key
-              moments that deserve emphasis."
+              &ldquo;This is a space for pull quotes, important realizations, or key
+              moments that deserve emphasis.&rdquo;
             </p>
           </blockquote>
         </article>
@@ -202,7 +202,7 @@ export default function StoryPage() {
             <li className="flex items-start gap-3">
               <span style={{ color: "var(--accent)" }}>•</span>
               <span>
-                [Learning or insight #3: What you'd tell your past self.]
+                [Learning or insight #3: What you&apos;d tell your past self.]
               </span>
             </li>
           </ul>
@@ -268,12 +268,12 @@ function breakthrough() {
             style={{ color: "var(--tx)" }}
           >
             <p>
-              [The current state of your journey. What you're building, why it
+              [The current state of your journey. What you&apos;re building, why it
               matters, how it feels to finally be doing this work.]
             </p>
             <p>
               [The ongoing chapter. The work that still needs to be done. The
-              excitement about what's next.]
+              excitement about what&apos;s next.]
             </p>
           </div>
         </article>
@@ -290,7 +290,7 @@ function breakthrough() {
             className={`text-xl ${notoSans.className}`}
             style={{ color: "var(--tx-2)" }}
           >
-            [This story isn't finished. It's being written, one day at a time.]
+            [This story isn&apos;t finished. It&apos;s being written, one day at a time.]
           </p>
         </article>
       </div>
