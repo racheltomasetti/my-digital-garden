@@ -15,7 +15,7 @@ export default function KIPage() {
       {/* BUILDING NOW SECTION */}
       <section className="pt-32 px-8 pb-8 max-w-7xl mx-auto">
         <TextType
-          text={["WHAT I'M BUILDING NOW"]}
+          text={["BUILDING NOW"]}
           className={`text-4xl md:text-6xl font-bold mb-12 text-center ${kalam.className}`}
           textColors={["var(--accent)"]}
           typingSpeed={60}
