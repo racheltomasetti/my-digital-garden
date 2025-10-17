@@ -82,7 +82,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       }
 
       // Define page order for cycling
-      const mainPages = ["/", "/story", "/ki"];
+      const mainPages = ["/", "/ki"];
       const projectPages = ["/ki/builder-ki", "/ki/cycle-ki", "/ki/mind-ki"];
 
       const isMainPage = mainPages.includes(pathname);
@@ -104,12 +104,14 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         if (isProjectPage) {
           // Cycle backward through project pages
           const currentIndex = projectPages.indexOf(pathname);
-          const prevIndex = (currentIndex - 1 + projectPages.length) % projectPages.length;
+          const prevIndex =
+            (currentIndex - 1 + projectPages.length) % projectPages.length;
           router.push(projectPages[prevIndex]);
         } else if (isMainPage) {
           // Navigate to previous main page (backward)
           const currentIndex = mainPages.indexOf(pathname);
-          const prevIndex = (currentIndex - 1 + mainPages.length) % mainPages.length;
+          const prevIndex =
+            (currentIndex - 1 + mainPages.length) % mainPages.length;
           router.push(mainPages[prevIndex]);
         }
       } else if (event.key === "ArrowUp" && isProjectPage) {

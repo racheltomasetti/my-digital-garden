@@ -61,39 +61,6 @@ export default function Navigation() {
           {/* Right: Desktop navigation links */}
           <div className={`hidden md:flex gap-8 ${kalam.className}`}>
             <Link
-              href="/story"
-              className={`text-3xl transition-colors ${
-                pathname === "/story" ? "font-bold" : ""
-              }`}
-              style={
-                pathname === "/story"
-                  ? { color: "var(--accent)" }
-                  : isThemedPage
-                  ? { color: "var(--tx)" }
-                  : { color: "white" }
-              }
-              onMouseEnter={(e) => {
-                if (pathname !== "/story") {
-                  if (isThemedPage) {
-                    e.currentTarget.style.color = "var(--tx-2)";
-                  } else {
-                    e.currentTarget.style.color = "rgba(255, 255, 255, 0.8)";
-                  }
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (pathname === "/story") {
-                  e.currentTarget.style.color = "var(--accent)";
-                } else if (isThemedPage) {
-                  e.currentTarget.style.color = "var(--tx)";
-                } else {
-                  e.currentTarget.style.color = "white";
-                }
-              }}
-            >
-              MY STORY
-            </Link>
-            <Link
               href="/ki"
               className={`text-3xl transition-colors ${
                 pathname === "/ki" ? "font-bold" : ""
@@ -126,6 +93,39 @@ export default function Navigation() {
             >
               NOW
             </Link>
+            {/* <Link
+              href="/story"
+              className={`text-3xl transition-colors ${
+                pathname === "/story" ? "font-bold" : ""
+              }`}
+              style={
+                pathname === "/story"
+                  ? { color: "var(--accent)" }
+                  : isThemedPage
+                  ? { color: "var(--tx)" }
+                  : { color: "white" }
+              }
+              onMouseEnter={(e) => {
+                if (pathname !== "/story") {
+                  if (isThemedPage) {
+                    e.currentTarget.style.color = "var(--tx-2)";
+                  } else {
+                    e.currentTarget.style.color = "rgba(255, 255, 255, 0.8)";
+                  }
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (pathname === "/story") {
+                  e.currentTarget.style.color = "var(--accent)";
+                } else if (isThemedPage) {
+                  e.currentTarget.style.color = "var(--tx)";
+                } else {
+                  e.currentTarget.style.color = "white";
+                }
+              }}
+            >
+              MY STORY
+            </Link> */}
           </div>
 
           {/* Mobile: Hamburger menu button */}
@@ -159,40 +159,6 @@ export default function Navigation() {
             className={`md:hidden mt-4 flex flex-col gap-4 animate-fade-in ${kalam.className}`}
           >
             <Link
-              href="/story"
-              className={`transition-colors ${
-                pathname === "/story" ? "font-bold" : ""
-              }`}
-              style={
-                pathname === "/story"
-                  ? { color: "var(--accent)" }
-                  : isThemedPage
-                  ? { color: "var(--tx)" }
-                  : { color: "white" }
-              }
-              onClick={() => setIsMobileMenuOpen(false)}
-              onMouseEnter={(e) => {
-                if (pathname !== "/story") {
-                  if (isThemedPage) {
-                    e.currentTarget.style.color = "var(--tx-2)";
-                  } else {
-                    e.currentTarget.style.color = "rgba(255, 255, 255, 0.8)";
-                  }
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (pathname === "/story") {
-                  e.currentTarget.style.color = "var(--accent)";
-                } else if (isThemedPage) {
-                  e.currentTarget.style.color = "var(--tx)";
-                } else {
-                  e.currentTarget.style.color = "white";
-                }
-              }}
-            >
-              STORY
-            </Link>
-            <Link
               href="/ki"
               className={`transition-colors ${
                 pathname === "/ki" ? "font-bold" : ""
@@ -226,6 +192,40 @@ export default function Navigation() {
             >
               NOW
             </Link>
+            {/* <Link
+              href="/story"
+              className={`transition-colors ${
+                pathname === "/story" ? "font-bold" : ""
+              }`}
+              style={
+                pathname === "/story"
+                  ? { color: "var(--accent)" }
+                  : isThemedPage
+                  ? { color: "var(--tx)" }
+                  : { color: "white" }
+              }
+              onClick={() => setIsMobileMenuOpen(false)}
+              onMouseEnter={(e) => {
+                if (pathname !== "/story") {
+                  if (isThemedPage) {
+                    e.currentTarget.style.color = "var(--tx-2)";
+                  } else {
+                    e.currentTarget.style.color = "rgba(255, 255, 255, 0.8)";
+                  }
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (pathname === "/story") {
+                  e.currentTarget.style.color = "var(--accent)";
+                } else if (isThemedPage) {
+                  e.currentTarget.style.color = "var(--tx)";
+                } else {
+                  e.currentTarget.style.color = "white";
+                }
+              }}
+            >
+              STORY
+            </Link> */}
           </div>
         )}
       </nav>
