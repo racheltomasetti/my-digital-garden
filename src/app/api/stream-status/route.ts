@@ -1,8 +1,18 @@
 import { NextResponse } from "next/server";
 
+// Stream status response type
+interface StreamStatus {
+  isLive: boolean;
+  title?: string;
+  game?: string;
+  viewerCount?: number;
+  thumbnailUrl?: string;
+  username?: string;
+}
+
 // Cache for storing stream status
 let cache: {
-  data: any;
+  data: StreamStatus;
   timestamp: number;
 } | null = null;
 
