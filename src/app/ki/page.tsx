@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import Navigation from "@/app/components/Navigation";
 import { kalam, notoSans } from "@/app/fonts";
 import TextType from "@/components/TextType";
@@ -15,7 +16,7 @@ export default function KIPage() {
       {/* BUILDING NOW SECTION */}
       <section className="pt-32 px-8 pb-8 max-w-7xl mx-auto">
         <TextType
-          text={["BUILDING NOW"]}
+          text={["BUILDING NOW..."]}
           className={`text-4xl md:text-6xl font-bold mb-12 text-center ${kalam.className}`}
           textColors={["var(--accent)"]}
           typingSpeed={60}
@@ -26,9 +27,8 @@ export default function KIPage() {
       </section>
 
       {/* Projects Grid Section */}
-      {/* <section className="px-8 py-8 max-w-7xl mx-auto">
+      <section className="px-8 py-8 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-
           <Link href="/ki/builder-ki">
             <div
               className="p-6 rounded-lg border-2 transition-all hover:scale-105 cursor-pointer h-full flex flex-col"
@@ -138,7 +138,7 @@ export default function KIPage() {
             </div>
           </Link>
         </div>
-      </section> */}
+      </section>
 
       {/* Demo Showcase */}
       <DemoShowcase
