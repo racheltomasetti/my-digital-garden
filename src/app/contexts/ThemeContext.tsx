@@ -81,42 +81,12 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         return;
       }
 
-      // Define page order for cycling
-      const mainPages = ["/", "/ki"];
-      const projectPages = ["/ki/builder-ki", "/ki/cycle-ki", "/ki/mind-ki"];
-
-      const isMainPage = mainPages.includes(pathname);
-      const isProjectPage = projectPages.includes(pathname);
-
-      if (event.key === "ArrowRight") {
-        if (isProjectPage) {
-          // Cycle forward through project pages
-          const currentIndex = projectPages.indexOf(pathname);
-          const nextIndex = (currentIndex + 1) % projectPages.length;
-          router.push(projectPages[nextIndex]);
-        } else if (isMainPage) {
-          // Navigate to next main page (forward)
-          const currentIndex = mainPages.indexOf(pathname);
-          const nextIndex = (currentIndex + 1) % mainPages.length;
-          router.push(mainPages[nextIndex]);
-        }
-      } else if (event.key === "ArrowLeft") {
-        if (isProjectPage) {
-          // Cycle backward through project pages
-          const currentIndex = projectPages.indexOf(pathname);
-          const prevIndex =
-            (currentIndex - 1 + projectPages.length) % projectPages.length;
-          router.push(projectPages[prevIndex]);
-        } else if (isMainPage) {
-          // Navigate to previous main page (backward)
-          const currentIndex = mainPages.indexOf(pathname);
-          const prevIndex =
-            (currentIndex - 1 + mainPages.length) % mainPages.length;
-          router.push(mainPages[prevIndex]);
-        }
-      } else if (event.key === "ArrowUp" && isProjectPage) {
-        // Navigate back to NOW page from any project page
+      if (event.key === "ArrowRight" && pathname === "/") {
+        // Right arrow on home page navigates to /ki
         router.push("/ki");
+      } else if (event.key === "ArrowLeft" && pathname === "/ki") {
+        // Left arrow on /ki navigates back to home page
+        router.push("/");
       }
     };
 

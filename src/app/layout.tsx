@@ -10,7 +10,7 @@ const caveat = Caveat({
 
 export const metadata: Metadata = {
   title: "let's build.",
-  description: "Ray's digital garden",
+  description: "mind garden",
   viewport: {
     width: "device-width",
     initialScale: 1,

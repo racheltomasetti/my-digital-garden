@@ -3,8 +3,8 @@
 import { useRef } from "react";
 import Link from "next/link";
 import Navigation from "@/app/components/Navigation";
-import { kalam, notoSans } from "@/app/fonts";
-import TextType from "@/components/TextType";
+import { kalam, perpetua } from "@/app/fonts";
+import TextType from "@/components/TextType"; //text typing effect
 import DemoShowcase from "@/app/components/DemoShowcase";
 
 export default function KIPage() {
@@ -16,7 +16,7 @@ export default function KIPage() {
       {/* BUILDING NOW SECTION */}
       <section className="pt-32 px-8 pb-8 max-w-7xl mx-auto">
         <TextType
-          text={["BUILDING NOW..."]}
+          text={["KI"]}
           className={`text-4xl md:text-6xl font-bold mb-12 text-center ${kalam.className}`}
           textColors={["var(--accent)"]}
           typingSpeed={60}
@@ -24,120 +24,6 @@ export default function KIPage() {
           showCursor={true}
           cursorCharacter="|"
         />
-      </section>
-
-      {/* Projects Grid Section */}
-      <section className="px-8 py-8 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Link href="/ki/builder-ki">
-            <div
-              className="p-6 rounded-lg border-2 transition-all hover:scale-105 cursor-pointer h-full flex flex-col"
-              style={{
-                backgroundColor: "var(--ui)",
-                borderColor: "var(--accent)",
-              }}
-            >
-              <div className="space-y-3 flex-grow">
-                <div className="flex items-center justify-between">
-                  <h3
-                    className={`text-xl font-bold ${kalam.className}`}
-                    style={{ color: "var(--tx)" }}
-                  >
-                    KI
-                  </h3>
-                  <span
-                    className={`text-xs px-3 py-1 rounded-full ${notoSans.className}`}
-                    style={{
-                      backgroundColor: "var(--accent)",
-                      color: "white",
-                    }}
-                  >
-                    BUILDING
-                  </span>
-                </div>
-                <p
-                  className={`text-sm ${notoSans.className}`}
-                  style={{ color: "var(--tx-2)" }}
-                >
-                  A digital extension of the mind.
-                </p>
-              </div>
-            </div>
-          </Link>
-
-          <Link href="/ki/cycle-ki">
-            <div
-              className="p-6 rounded-lg border-2 transition-all hover:scale-105 cursor-pointer h-full flex flex-col"
-              style={{
-                backgroundColor: "var(--ui)",
-                borderColor: "var(--accent)",
-              }}
-            >
-              <div className="space-y-3 flex-grow">
-                <div className="flex items-center justify-between">
-                  <h3
-                    className={`text-xl font-bold ${kalam.className}`}
-                    style={{ color: "var(--tx)" }}
-                  >
-                    Women's Expert Assistant
-                  </h3>
-                  <span
-                    className={`text-xs px-3 py-1 rounded-full ${notoSans.className}`}
-                    style={{
-                      backgroundColor: "var(--accent-2)",
-                      color: "white",
-                    }}
-                  >
-                    PLANNING
-                  </span>
-                </div>
-                <p
-                  className={`text-sm ${notoSans.className}`}
-                  style={{ color: "var(--tx-2)" }}
-                >
-                  Hormonal Cycle Expert Assistant. A tool to help women
-                  understand their bodies and live in their flow.
-                </p>
-              </div>
-            </div>
-          </Link>
-
-          <Link href="/ki/mind-ki">
-            <div
-              className="p-6 rounded-lg border-2 transition-all hover:scale-105 cursor-pointer h-full flex flex-col"
-              style={{
-                backgroundColor: "var(--ui)",
-                borderColor: "var(--accent)",
-              }}
-            >
-              <div className="space-y-3 flex-grow">
-                <div className="flex items-center justify-between">
-                  <h3
-                    className={`text-xl font-bold ${kalam.className}`}
-                    style={{ color: "var(--tx)" }}
-                  >
-                    my-digital-garden
-                  </h3>
-                  <span
-                    className={`text-xs px-3 py-1 rounded-full ${notoSans.className}`}
-                    style={{
-                      backgroundColor: "var(--accent)",
-                      color: "white",
-                    }}
-                  >
-                    IN PROGRESS
-                  </span>
-                </div>
-                <p
-                  className={`text-sm ${notoSans.className}`}
-                  style={{ color: "var(--tx-2)" }}
-                >
-                  Where we are now.
-                </p>
-              </div>
-            </div>
-          </Link>
-        </div>
       </section>
 
       {/* Demo Showcase */}
@@ -173,7 +59,7 @@ export default function KIPage() {
           {/* Email */}
           <a
             href="mailto:build.ray.build@gmail.com"
-            className={`block text-2xl md:text-3xl transition-colors ${notoSans.className}`}
+            className={`block text-2xl md:text-3xl transition-colors ${perpetua.className}`}
             style={{ color: "var(--tx)" }}
             onMouseEnter={(e) => {
               e.currentTarget.style.color = "var(--accent)";

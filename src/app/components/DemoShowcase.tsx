@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useEffect } from "react";
-import { kalam, notoSans } from "@/app/fonts";
+import { kalam, perpetua } from "@/app/fonts";
 
 interface DemoShowcaseProps {
   projectName: string;
@@ -107,7 +107,7 @@ export default function DemoShowcase({
           </h3>
           {blurb && (
             <p
-              className={`mt-4 text-base md:text-lg max-w-3xl mx-auto ${notoSans.className}`}
+              className={`mt-4 text-base md:text-lg max-w-3xl mx-auto ${perpetua.className}`}
               style={{ color: "var(--tx-2)" }}
             >
               {blurb}

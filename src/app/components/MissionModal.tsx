@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { kalam, notoSans, dancingScript } from "@/app/fonts";
+import { kalam, perpetua, dancingScript } from "@/app/fonts";
 
 interface MissionModalProps {
   isOpen: boolean;
