@@ -14,16 +14,18 @@ export default function KIPage() {
     <div className="min-h-screen" style={{ background: "var(--bg)" }}>
       <Navigation />
       {/* BUILDING NOW SECTION */}
-      <section className="pt-32 px-8 pb-8 max-w-7xl mx-auto">
-        <TextType
-          text={["KI"]}
-          className={`text-4xl md:text-6xl font-bold mb-12 text-center ${kalam.className}`}
-          textColors={["var(--accent)"]}
-          typingSpeed={60}
-          pauseDuration={1800}
-          showCursor={true}
-          cursorCharacter="|"
+      <section className="pt-32 px-8 pb-8 max-w-7xl mx-auto text-center">
+        <h1
+          className={`text-4xl md:text-6xl font-bold mb-12 text-center italic ${perpetua.className}`}
+          style={{ color: "var(--accent)" }}
+        >
+          KI
+        </h1>
+        <hr
+          className="w-full mx-auto border-t-3 opacity-50"
+          style={{ borderColor: "var(--accent-2)" }}
         />
+        <br />
       </section>
 
       {/* Demo Showcase */}
@@ -44,7 +46,7 @@ export default function KIPage() {
         className="mt-24 py-16 px-8"
         style={{
           backgroundColor: "var(--ui)",
-          borderTop: "2px solid var(--accent)",
+          borderTop: "11px solid var(--accent-2)",
         }}
       >
         <div className="max-w-2xl mx-auto text-center space-y-8">

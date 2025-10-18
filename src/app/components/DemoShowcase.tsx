@@ -66,7 +66,10 @@ export default function DemoShowcase({
           style={{ borderColor: "var(--ui-2)" }}
         >
           {/* Left: Project Name · Demo # */}
-          <div className={`text-lg md:text-xl font-bold ${kalam.className}`} style={{ color: "var(--tx)" }}>
+          <div
+            className={`text-lg md:text-xl font-bold ${kalam.className}`}
+            style={{ color: "var(--tx)" }}
+          >
             {projectName} · Demo #{demoNumber}
           </div>
 
@@ -126,7 +129,7 @@ export default function DemoShowcase({
               Web
             </h3>
             <div
-              className="rounded-2xl overflow-hidden border-4 transition-all hover:scale-[1.02]"
+              className="rounded-2xl overflow-hidden border-3 transition-all hover:scale-[1.02]"
               style={{ borderColor: "var(--accent)" }}
             >
               <video
@@ -154,7 +157,7 @@ export default function DemoShowcase({
               Mobile
             </h3>
             <div
-              className="rounded-2xl overflow-hidden border-4 transition-all hover:scale-[1.02]"
+              className="rounded-2xl overflow-hidden border-3 transition-all hover:scale-[1.02]"
               style={{ borderColor: "var(--accent)" }}
             >
               <video

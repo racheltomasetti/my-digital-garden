@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import Navigation from "@/app/components/Navigation";
+import LiveIndicator from "@/app/components/LiveIndicator";
 
 const Garden = dynamic(() => import("@/app/components/garden/Garden"), {
   ssr: false,
@@ -13,6 +14,7 @@ const Garden = dynamic(() => import("@/app/components/garden/Garden"), {
 export default function Home() {
   return (
     <>
+      <LiveIndicator />
       <Navigation />
       <Garden />
     </>
