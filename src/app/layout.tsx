@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Caveat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
+import WelcomeModal from "./components/WelcomeModal";
 
 const caveat = Caveat({
   subsets: ["latin"],
@@ -39,7 +40,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`${caveat.className} antialiased`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <WelcomeModal />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
