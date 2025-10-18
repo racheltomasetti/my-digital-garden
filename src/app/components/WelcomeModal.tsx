@@ -126,7 +126,7 @@ export default function WelcomeModal() {
                   className="text-base md:text-lg"
                   style={{ color: "var(--tx-2)" }}
                 >
-                  What I'm currently building and learning
+                  What I&apos;m currently building and learning
                 </p>
               </div>
             </div>
@@ -223,7 +223,11 @@ export default function WelcomeModal() {
             className={`text-center text-sm ${perpetua.className}`}
             style={{ color: "var(--tx-3)" }}
           >
-            Press <kbd className="text-xs" style={{ color: "var(--tx-2)" }}>ESC</kbd> or click outside to close
+            Press{" "}
+            <kbd className="text-xs" style={{ color: "var(--tx-2)" }}>
+              ESC
+            </kbd>{" "}
+            or click outside to close
           </p>
         </div>
 
