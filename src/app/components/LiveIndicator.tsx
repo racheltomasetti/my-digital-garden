@@ -14,24 +14,16 @@ interface StreamStatus {
 
 export default function LiveIndicator() {
   const [streamStatus, setStreamStatus] = useState<StreamStatus>({ isLive: false });
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true); // Always visible, shows offline or live state
 
   const fetchStreamStatus = async () => {
     try {
       const response = await fetch("/api/stream-status");
       const data = await response.json();
       setStreamStatus(data);
-
-      // Handle visibility with smooth transitions
-      if (data.isLive && !isVisible) {
-        setIsVisible(true);
-      } else if (!data.isLive && isVisible) {
-        setIsVisible(false);
-      }
     } catch (error) {
       console.error("Failed to fetch stream status:", error);
       setStreamStatus({ isLive: false });
-      setIsVisible(false);
     }
   };
 
@@ -46,9 +38,63 @@ export default function LiveIndicator() {
     return () => clearInterval(interval);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Don't render anything if not live
+  // Render offline state if not live
   if (!streamStatus.isLive) {
-    return null;
+    return (
+      <div
+        className={`fixed top-20 left-4 md:top-24 md:left-6 z-[1000] transition-all duration-500 ease-out ${
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+        }`}
+        style={{
+          pointerEvents: isVisible ? "auto" : "none",
+        }}
+      >
+        {/* Offline Glassmorphism Card */}
+        <div
+          className={`
+            relative overflow-hidden rounded-2xl
+            transition-all duration-300 ease-out
+            ${kalam.className}
+          `}
+          style={{
+            background: "rgba(0, 0, 0, 0.2)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            border: "2px solid rgba(255, 255, 255, 0.1)",
+            boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
+            maxWidth: "200px",
+          }}
+        >
+          {/* Offline Content */}
+          <div className="p-3 space-y-2">
+            {/* Offline Badge */}
+            <div className="flex items-center gap-2">
+              <div className="relative flex items-center">
+                {/* Gray dot */}
+                <div
+                  className="relative w-2.5 h-2.5 rounded-full"
+                  style={{ backgroundColor: "#6b7280" }}
+                />
+              </div>
+              <span
+                className="text-sm font-bold tracking-wide"
+                style={{ color: "#9ca3af" }}
+              >
+                OFFLINE
+              </span>
+            </div>
+
+            {/* Message */}
+            <p
+              className="text-xs opacity-70"
+              style={{ color: "var(--tx-2)" }}
+            >
+              Not streaming right now
+            </p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   const handleClick = () => {
