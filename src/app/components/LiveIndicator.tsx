@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { kalam } from "@/app/fonts";
+import { useTheme } from "@/app/contexts/ThemeContext";
 
 interface StreamStatus {
   isLive: boolean;
@@ -13,7 +14,10 @@ interface StreamStatus {
 }
 
 export default function LiveIndicator() {
-  const [streamStatus, setStreamStatus] = useState<StreamStatus>({ isLive: false });
+  const { theme } = useTheme();
+  const [streamStatus, setStreamStatus] = useState<StreamStatus>({
+    isLive: false,
+  });
   const [isVisible, setIsVisible] = useState(true); // Always visible, shows offline or live state
 
   const fetchStreamStatus = async () => {
@@ -57,11 +61,11 @@ export default function LiveIndicator() {
             ${kalam.className}
           `}
           style={{
-            background: "rgba(0, 0, 0, 0.2)",
+            background: theme === "light" ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.2)",
             backdropFilter: "blur(12px)",
             WebkitBackdropFilter: "blur(12px)",
-            border: "2px solid rgba(255, 255, 255, 0.1)",
-            boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
+            border: theme === "light" ? "2px solid rgba(0, 0, 0, 0.15)" : "2px solid rgba(255, 255, 255, 0.1)",
+            boxShadow: theme === "light" ? "0 8px 32px 0 rgba(0, 0, 0, 0.15)" : "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
             maxWidth: "200px",
           }}
         >
@@ -78,17 +82,14 @@ export default function LiveIndicator() {
               </div>
               <span
                 className="text-sm font-bold tracking-wide"
-                style={{ color: "#9ca3af" }}
+                style={{ color: theme === "light" ? "#4b5563" : "#9ca3af" }}
               >
-                OFFLINE
+                NOT LIVE
               </span>
             </div>
 
             {/* Message */}
-            <p
-              className="text-xs opacity-70"
-              style={{ color: "var(--tx-2)" }}
-            >
+            <p className="text-xs opacity-70" style={{ color: "var(--tx-2)" }}>
               Not streaming right now
             </p>
           </div>
@@ -100,7 +101,11 @@ export default function LiveIndicator() {
   const handleClick = () => {
     // Get username from the stream status response or fallback
     // We'll need to add this to the API response
-    window.open(`https://twitch.tv/${streamStatus.username || ""}`, "_blank", "noopener,noreferrer");
+    window.open(
+      `https://twitch.tv/${streamStatus.username || ""}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
   };
 
   return (
@@ -122,11 +127,11 @@ export default function LiveIndicator() {
           ${kalam.className}
         `}
         style={{
-          background: "rgba(0, 0, 0, 0.3)",
+          background: theme === "light" ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.3)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
           border: "2px solid rgba(227, 83, 54, 0.5)",
-          boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.4)",
+          boxShadow: theme === "light" ? "0 8px 32px 0 rgba(0, 0, 0, 0.15)" : "0 8px 32px 0 rgba(0, 0, 0, 0.4)",
           maxWidth: "320px",
         }}
       >
@@ -166,10 +171,7 @@ export default function LiveIndicator() {
 
           {/* Game Name */}
           {streamStatus.game && (
-            <p
-              className="text-sm opacity-90"
-              style={{ color: "var(--tx-2)" }}
-            >
+            <p className="text-sm opacity-90" style={{ color: "var(--tx-2)" }}>
               {streamStatus.game}
             </p>
           )}
@@ -193,7 +195,10 @@ export default function LiveIndicator() {
                 <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
                 <circle cx="12" cy="12" r="3" />
               </svg>
-              <span className="text-sm font-medium" style={{ color: "var(--tx)" }}>
+              <span
+                className="text-sm font-medium"
+                style={{ color: "var(--tx)" }}
+              >
                 {streamStatus.viewerCount.toLocaleString()} watching
               </span>
             </div>
