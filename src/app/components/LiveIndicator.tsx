@@ -46,7 +46,7 @@ export default function LiveIndicator() {
   if (!streamStatus.isLive) {
     return (
       <div
-        className={`fixed top-20 left-4 md:top-24 md:left-6 z-[1000] transition-all duration-500 ease-out ${
+        className={`fixed top-20 right-4 md:top-24 md:right-6 z-[1000] transition-all duration-500 ease-out ${
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
         }`}
         style={{
@@ -110,7 +110,7 @@ export default function LiveIndicator() {
 
   return (
     <div
-      className={`fixed top-20 left-4 md:top-24 md:left-6 z-[1000] transition-all duration-500 ease-out ${
+      className={`fixed top-20 right-4 md:top-24 md:right-6 z-[1000] transition-all duration-500 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
       }`}
       style={{

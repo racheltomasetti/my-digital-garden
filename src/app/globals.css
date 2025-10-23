@@ -16,7 +16,7 @@ html.dark {
   --ui-2: var(--color-flexoki-dark-ui-2);
   --ui-3: var(--color-flexoki-dark-ui-3);
   --accent: #e35336;
-  --accent-2: #8f9779;
+  --accent-2: rgb(58, 169, 159);
 }
 
 /* Light theme */
@@ -30,7 +30,8 @@ html.light {
   --ui-2: var(--color-flexoki-light-ui-2);
   --ui-3: var(--color-flexoki-light-ui-3);
   --accent: #e35336;
-  --accent-2: #8f9779;
+  /* --accent-2: #8f9779; */
+  --accent-2: rgb(58, 169, 159);
 }
 
 body {

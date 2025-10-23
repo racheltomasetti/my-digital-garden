@@ -62,7 +62,10 @@ export default function CountdownModal() {
 
   return (
     <div
-      className={`fixed top-20 right-4 md:top-24 md:right-6 z-[1000] transition-all duration-500 ease-out`}
+      className={`fixed top-20 left-4 md:top-24 md:left-[216px] z-[1000] transition-all duration-500 ease-out`}
+      style={{
+        pointerEvents: "auto",
+      }}
     >
       {/* Glassmorphism Card */}
       <div
@@ -78,7 +81,6 @@ export default function CountdownModal() {
           WebkitBackdropFilter: "blur(12px)",
           border: theme === "light" ? "2px solid rgba(0, 0, 0, 0.15)" : "2px solid rgba(255, 255, 255, 0.1)",
           boxShadow: theme === "light" ? "0 8px 32px 0 rgba(0, 0, 0, 0.15)" : "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
-          minWidth: "280px",
         }}
       >
         {/* Countdown Content */}
