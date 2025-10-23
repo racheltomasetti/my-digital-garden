@@ -15,7 +15,8 @@ html.dark {
   --ui: var(--color-flexoki-dark-ui);
   --ui-2: var(--color-flexoki-dark-ui-2);
   --ui-3: var(--color-flexoki-dark-ui-3);
-  --accent: #e35336;
+  /* --accent: #e35336; */
+  --accent: rgb(209, 77, 65);
   --accent-2: rgb(58, 169, 159);
 }
 
@@ -29,7 +30,9 @@ html.light {
   --ui: var(--color-flexoki-light-ui);
   --ui-2: var(--color-flexoki-light-ui-2);
   --ui-3: var(--color-flexoki-light-ui-3);
-  --accent: #e35336;
+  /* --accent: #e35336; */
+  --accent: rgb(192, 62, 53);
+
   /* --accent-2: #8f9779; */
   --accent-2: rgb(58, 169, 159);
 }

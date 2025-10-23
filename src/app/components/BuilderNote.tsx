@@ -96,7 +96,7 @@ export default function BuilderNote() {
               {!hasRead && (
                 <>
                   <div
-                    className="absolute -top-1 -right-1 w-3 h-3 rounded-full animate-ping"
+                    className="absolute -top-2 -right-1 w-3 h-3 rounded-full animate-ping"
                     style={{ backgroundColor: "rgba(227, 83, 54, 0.75)" }}
                   />
                   <div

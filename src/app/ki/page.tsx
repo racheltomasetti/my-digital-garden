@@ -28,7 +28,7 @@ export default function KIPage() {
           }}
         >
           <h1
-            className={`text-4xl md:text-6xl font-bold italic mb-12 ${perpetua.className}`}
+            className={`text-5xl md:text-6xl font-bold italic mb-12 ${perpetua.className}`}
             style={{ color: "var(--accent)" }}
           >
             KI
