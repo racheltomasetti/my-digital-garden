@@ -2,19 +2,20 @@
 
 import { useRef } from "react";
 import Link from "next/link";
-import Navigation from "@/app/components/Navigation";
+// import Navigation from "@/app/components/Navigation";
 import KiSidebar from "@/app/components/KiSidebar";
 import CountdownModal from "@/app/components/CountdownModal";
 import { kalam, perpetua } from "@/app/fonts";
 import TextType from "@/components/TextType"; //text typing effect
 import DemoShowcase from "@/app/components/DemoShowcase";
+import ProjectsGrid from "@/app/components/ProjectsGrid";
 
 export default function KIPage() {
   const connectSectionRef = useRef<HTMLElement>(null);
 
   return (
     <div className="min-h-screen" style={{ background: "var(--bg)" }}>
-      <Navigation />
+      {/* <Navigation /> */}
       <KiSidebar />
       <CountdownModal />
       {/* Main Content - Push right on desktop to avoid sidebar overlap */}
@@ -96,12 +97,7 @@ export default function KIPage() {
             style={{ borderColor: "var(--accent-2)" }}
           />
           <br />
-          <p
-            className={`text-center text-2xl ${perpetua.className}`}
-            style={{ color: "var(--tx-2)" }}
-          >
-            Coming soon…
-          </p>
+          <ProjectsGrid />
         </section>
 
         {/* RESOURCES SECTION - Placeholder */}
@@ -195,7 +191,7 @@ export default function KIPage() {
             <br />
             <br />
             <br />
-            <p
+            {/* <p
               className={`text-3xl font-bold ${kalam.className}`}
               style={{ color: "var(--accent)" }}
             >
@@ -203,7 +199,7 @@ export default function KIPage() {
                 text="don't think, BUILD..."
                 textColors={["var(--accent)"]}
               />
-            </p>
+            </p> */}
           </div>
         </section>
       </div>
