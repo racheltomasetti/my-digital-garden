@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { kalam, perpetua, dancingScript } from "@/app/fonts";
+import { perpetua } from "@/app/fonts";
 
 interface MissionModalProps {
   isOpen: boolean;
@@ -58,13 +58,13 @@ export default function MissionModal({ isOpen, onClose }: MissionModalProps) {
         {/* Modal Content */}
         <div style={{ color: "var(--tx)" }}>
           <h2
-            className={`text-4xl font-bold mb-6 text-center ${kalam.className}`}
+            className={`text-4xl font-bold mb-6 text-center ${perpetua.className}`}
             style={{ color: "var(--accent)" }}
           >
             CORE MISSION
           </h2>
 
-          <div className={`space-y-4 ${kalam.className}`}>
+          <div className={`space-y-4 ${perpetua.className}`}>
             <p
               className="text-4xl leading-relaxed italic text-center"
               style={{ color: "var(--tx)" }}

@@ -1,12 +1,7 @@
 import type { Metadata } from "next";
-import { Caveat } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
-
-const caveat = Caveat({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-});
+import { perpetua } from "./fonts";
 
 export const metadata: Metadata = {
   title: "let's build.",
@@ -38,10 +33,8 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${caveat.className} antialiased`}>
-        <ThemeProvider>
-          {children}
-        </ThemeProvider>
+      <body className={`${perpetua.className} antialiased`}>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );

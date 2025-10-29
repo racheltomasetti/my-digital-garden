@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { kalam } from "@/app/fonts";
+import { perpetua } from "@/app/fonts";
 import { useTheme } from "@/app/contexts/ThemeContext";
 
 interface StreamStatus {
@@ -58,14 +58,23 @@ export default function LiveIndicator() {
           className={`
             relative overflow-hidden rounded-2xl
             transition-all duration-300 ease-out
-            ${kalam.className}
+            ${perpetua.className}
           `}
           style={{
-            background: theme === "light" ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.2)",
+            background:
+              theme === "light"
+                ? "rgba(255, 255, 255, 0.5)"
+                : "rgba(0, 0, 0, 0.2)",
             backdropFilter: "blur(12px)",
             WebkitBackdropFilter: "blur(12px)",
-            border: theme === "light" ? "2px solid rgba(0, 0, 0, 0.15)" : "2px solid rgba(255, 255, 255, 0.1)",
-            boxShadow: theme === "light" ? "0 8px 32px 0 rgba(0, 0, 0, 0.15)" : "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
+            border:
+              theme === "light"
+                ? "2px solid rgba(0, 0, 0, 0.15)"
+                : "2px solid rgba(255, 255, 255, 0.1)",
+            boxShadow:
+              theme === "light"
+                ? "0 8px 32px 0 rgba(0, 0, 0, 0.15)"
+                : "0 8px 32px 0 rgba(0, 0, 0, 0.3)",
             maxWidth: "200px",
           }}
         >
@@ -124,14 +133,20 @@ export default function LiveIndicator() {
           relative overflow-hidden rounded-2xl cursor-pointer
           transition-all duration-300 ease-out
           hover:scale-105 hover:shadow-2xl
-          ${kalam.className}
+          ${perpetua.className}
         `}
         style={{
-          background: theme === "light" ? "rgba(255, 255, 255, 0.5)" : "rgba(0, 0, 0, 0.3)",
+          background:
+            theme === "light"
+              ? "rgba(255, 255, 255, 0.5)"
+              : "rgba(0, 0, 0, 0.3)",
           backdropFilter: "blur(12px)",
           WebkitBackdropFilter: "blur(12px)",
           border: "2px solid rgba(227, 83, 54, 0.5)",
-          boxShadow: theme === "light" ? "0 8px 32px 0 rgba(0, 0, 0, 0.15)" : "0 8px 32px 0 rgba(0, 0, 0, 0.4)",
+          boxShadow:
+            theme === "light"
+              ? "0 8px 32px 0 rgba(0, 0, 0, 0.15)"
+              : "0 8px 32px 0 rgba(0, 0, 0, 0.4)",
           maxWidth: "320px",
         }}
       >

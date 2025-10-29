@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { kalam, perpetua } from "@/app/fonts";
+import { perpetua } from "@/app/fonts";
 import { useTheme } from "@/app/contexts/ThemeContext";
 
 export default function BuilderNote() {
@@ -53,7 +53,7 @@ export default function BuilderNote() {
             relative overflow-hidden rounded-2xl cursor-pointer
             transition-all duration-300 ease-out
             hover:scale-105 hover:shadow-2xl
-            ${kalam.className}
+            ${perpetua.className}
           `}
           style={{
             background:
