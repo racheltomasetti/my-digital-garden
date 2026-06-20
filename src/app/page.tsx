@@ -15,10 +15,6 @@ export default function RootPage() {
   return (
     <main>
       <section className="container">
-        <nav>
-          <span className="nav-name">raybuilds021</span>
-        </nav>
-
         <div
           style={{
             display: "flex",
