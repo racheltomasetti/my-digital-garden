@@ -28,7 +28,7 @@
   --text: var(--color-charcoal);
   --muted: #7a756d;
   --line: #dcd6c9;
-  --yellow: var(--color-ray);
+  --yellow: var(--color-terra);
   --red: var(--color-terra);
   --serif: var(--font-serif), Georgia, serif;
   --sans: var(--font-sans), system-ui, sans-serif;
@@ -41,6 +41,7 @@
   --text: #f0ede8;
   --muted: #6b6760;
   --line: #242220;
+  --yellow: var(--color-ray);
 }
 
 html {
@@ -501,7 +502,7 @@ footer {
 }
 
 .statement-ki:hover {
-  color: #f2d97c;
+  opacity: 0.85;
 }
 
 .statement-ki:focus-visible {

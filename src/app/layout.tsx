@@ -5,8 +5,8 @@ import { ModalProvider } from "./contexts/ModalContext";
 import { perpetua, merriweather, poppins, bebasNeue } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "Ray Builds Ki",
-  description: "Rachel Tomasetti — building Ki and more.",
+  title: "Rachel Tomasetti",
+  description: "ray builds ki",
 };
 
 export const viewport: Viewport = {
