@@ -54,16 +54,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
   // Apply theme to document
   useEffect(() => {
-    if (mounted) {
-      const root = document.documentElement;
-      root.classList.remove("light", "dark");
-      root.classList.add(theme);
+    if (!mounted) return;
 
-      // Only save if manually overridden
-      if (isManualOverride) {
-        localStorage.setItem("theme", theme);
-        localStorage.setItem("themeManualOverride", "true");
-      }
+    const root = document.documentElement;
+    root.classList.remove("light", "dark");
+    root.classList.add(theme);
+    root.classList.add("theme-ready");
+
+    if (isManualOverride) {
+      localStorage.setItem("theme", theme);
+      localStorage.setItem("themeManualOverride", "true");
     }
   }, [theme, mounted, isManualOverride]);
 
@@ -72,7 +72,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     setIsManualOverride(true); // Mark as manual override when toggled via keyboard
   }, []);
 
-  // Keyboard listener for "D" key (theme toggle)
+  // Keyboard listener for "D" / "L" theme toggle
   useEffect(() => {
     if (typeof window === "undefined" || !mounted) return;
 

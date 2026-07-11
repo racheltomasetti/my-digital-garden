@@ -13,6 +13,7 @@ import {
 import { createOcean, animateOcean } from "./scene/Ocean";
 import { createMountains } from "./scene/Mountains";
 import { useTheme } from "@/app/contexts/ThemeContext";
+import { THEME_TRANSITION_MS, themeEase } from "@/app/constants/themeTransition";
 
 interface GardenProps {
   onLighthouseClick?: () => void;
@@ -191,16 +192,15 @@ export default function Garden({ onLighthouseClick }: GardenProps) {
       };
     };
     const initialSize = getContainerSize();
-    const initialSquareSize = Math.max(
-      1,
-      Math.round(Math.min(initialSize.width, initialSize.height))
-    );
-    let lastSyncedSize = initialSquareSize;
+    const initialWidth = Math.max(1, Math.round(initialSize.width));
+    const initialHeight = Math.max(1, Math.round(initialSize.height));
+    let lastSyncedWidth = initialWidth;
+    let lastSyncedHeight = initialHeight;
 
     // Create camera with responsive positioning
     const camera = new THREE.PerspectiveCamera(
       65,
-      1,
+      initialWidth / initialHeight,
       0.1,
       100
     );
@@ -219,12 +219,12 @@ export default function Garden({ onLighthouseClick }: GardenProps) {
     };
 
     // Adjust camera based on container size
-    updateCameraView(initialSquareSize);
+    updateCameraView(initialWidth);
     console.log("Camera created");
 
     // Create renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(initialSquareSize, initialSquareSize, false);
+    renderer.setSize(initialWidth, initialHeight, false);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.domElement.style.position = "absolute";
     renderer.domElement.style.inset = "0";
@@ -349,16 +349,20 @@ export default function Garden({ onLighthouseClick }: GardenProps) {
     const animate = () => {
       animationId = requestAnimationFrame(animate);
 
-      // Keep camera/renderer locked to the actual rendered portal size.
-      // Mobile browsers can report unstable initial dimensions until after scroll.
+      // Keep camera/renderer locked to the actual viewport size.
       const rect = renderer.domElement.getBoundingClientRect();
-      const currentSize = Math.max(1, Math.round(Math.min(rect.width, rect.height)));
-      if (currentSize !== lastSyncedSize) {
-        lastSyncedSize = currentSize;
-        camera.aspect = 1;
+      const currentWidth = Math.max(1, Math.round(rect.width));
+      const currentHeight = Math.max(1, Math.round(rect.height));
+      if (
+        currentWidth !== lastSyncedWidth ||
+        currentHeight !== lastSyncedHeight
+      ) {
+        lastSyncedWidth = currentWidth;
+        lastSyncedHeight = currentHeight;
+        camera.aspect = currentWidth / currentHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize(currentSize, currentSize, false);
-        updateCameraView(currentSize);
+        renderer.setSize(currentWidth, currentHeight, false);
+        updateCameraView(currentWidth);
       }
 
       const time = clock.getElapsedTime();
@@ -454,17 +458,15 @@ export default function Garden({ onLighthouseClick }: GardenProps) {
     // Handle resize with responsive camera positioning
     const handleResize = () => {
       const nextSize = getContainerSize();
-      const nextSquareSize = Math.max(
-        1,
-        Math.round(Math.min(nextSize.width, nextSize.height))
-      );
-      camera.aspect = 1;
+      const nextWidth = Math.max(1, Math.round(nextSize.width));
+      const nextHeight = Math.max(1, Math.round(nextSize.height));
+      camera.aspect = nextWidth / nextHeight;
       camera.updateProjectionMatrix();
-      renderer.setSize(nextSquareSize, nextSquareSize, false);
+      renderer.setSize(nextWidth, nextHeight, false);
 
-      // Adjust camera framing based on the actual portal viewport size
-      updateCameraView(nextSquareSize);
-      lastSyncedSize = nextSquareSize;
+      updateCameraView(nextWidth);
+      lastSyncedWidth = nextWidth;
+      lastSyncedHeight = nextHeight;
     };
     window.addEventListener("resize", handleResize);
     window.visualViewport?.addEventListener("resize", handleResize);
@@ -628,19 +630,11 @@ export default function Garden({ onLighthouseClick }: GardenProps) {
         }
       : null;
 
-    // Animate transition over 0.8 seconds
-    const duration = 800;
-    const startTime = Date.now();
+    const startTime = performance.now();
 
-    const animateTransition = () => {
-      const elapsed = Date.now() - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-
-      // Smooth easing function
-      const eased =
-        progress < 0.5
-          ? 2 * progress * progress
-          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+    const animateTransition = (now: number) => {
+      const progress = Math.min((now - startTime) / THEME_TRANSITION_MS, 1);
+      const eased = themeEase(progress);
 
       // Interpolate sky colors
       refs.skyMaterial!.uniforms.topColor.value.lerpColors(
@@ -765,7 +759,7 @@ export default function Garden({ onLighthouseClick }: GardenProps) {
       }
     };
 
-    animateTransition();
+    requestAnimationFrame(animateTransition);
   }, [theme]);
 
   return (

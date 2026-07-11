@@ -11,7 +11,7 @@ Core Components
 
 1. Input Layer (Mobile - iOS)
 
-- Voice Recording → Real-time capture or upload existing audio
+- Voice Recording → Real-time capture or upload existing audio -> **ultimate audio ingester**
 - Photos/Videos → Camera or library upload with EXIF data
 - Daily Logs → Text notes (intention, daily, reflection, general)
 - Cycle Tracking → Menstrual periods with flow intensity

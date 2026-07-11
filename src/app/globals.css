@@ -1,23 +1,55 @@
+@import "tailwindcss";
+
+@theme {
+  /* Ki color palette */
+  --color-cream: #f6f1e6;
+  --color-charcoal: #1a1a1a;
+  --color-terra: #9e2a2b;
+  --color-ray: #efcb68;
+  --color-pacific: #58a4b0;
+  --color-sage: #67934d;
+
+  /* Typography — injected via next/font CSS variables */
+  --font-serif: var(--font-merriweather);
+  --font-sans: var(--font-poppins);
+  --font-display: var(--font-display);
+}
+
+/* Class-based dark mode — responds to .dark on <html> (set by ThemeContext) */
+@custom-variant dark (&:where(.dark, .dark *));
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Light mode (default) */
 :root {
-  --bg: #100f0f;
-  --text: #f6f1e6;
+  --theme-transition-duration: 800ms;
+  --theme-transition-easing: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --bg: var(--color-cream);
+  --text: var(--color-charcoal);
+  --muted: #7a756d;
+  --line: #dcd6c9;
+  --yellow: var(--color-ray);
+  --red: var(--color-terra);
+  --serif: var(--font-serif), Georgia, serif;
+  --sans: var(--font-sans), system-ui, sans-serif;
+  --display: var(--font-display), "Arial Black", sans-serif;
+}
+
+/* Dark mode */
+.dark {
+  --bg: var(--color-charcoal);
+  --text: #f0ede8;
   --muted: #6b6760;
   --line: #242220;
-  --yellow: #efcb68;
-  --red: #c45c5c;
-  --serif: var(--font-merriweather), Georgia, serif;
-  --sans: var(--font-poppins), sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
-  font-size: clamp(13px, 1.1vw, 17px);
+  font-size: clamp(15px, 14px + 0.35vw, 17px);
 }
 
 body {
-  background: var(--bg);
+  background-color: var(--bg);
   color: var(--text);
   font-family: var(--sans);
   font-size: 1rem;
@@ -25,6 +57,25 @@ body {
   letter-spacing: 0.01em;
   line-height: 1.8;
   min-height: 100vh;
+}
+
+html.theme-ready body {
+  transition:
+    background-color var(--theme-transition-duration) var(--theme-transition-easing),
+    color var(--theme-transition-duration) var(--theme-transition-easing);
+}
+
+html.theme-ready .theme-surface {
+  transition:
+    background-color var(--theme-transition-duration) var(--theme-transition-easing),
+    border-color var(--theme-transition-duration) var(--theme-transition-easing);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.theme-ready body,
+  html.theme-ready .theme-surface {
+    transition: none;
+  }
 }
 
 .container {
@@ -128,6 +179,10 @@ nav {
 }
 
 .hero-building-ki .hero-building:hover {
+  color: var(--muted);
+}
+
+.dark .hero-building-ki .hero-building:hover {
   color: #e0dccf;
 }
 
@@ -300,8 +355,9 @@ a.link-row:hover .link-arrow { color: var(--text); }
   font-family: var(--sans);
   font-size: 0.77rem;
   font-weight: 300;
-  color: #3a3835;
+  color: var(--muted);
   letter-spacing: 0.05em;
+  opacity: 0.75;
 }
 
 .link-arrow {
@@ -393,6 +449,198 @@ footer {
 }
 
 .logo-link:hover { opacity: 0.75; }
+
+/* ── Home layout ──────────────────────────────────── */
+
+.home-hero {
+  width: 100%;
+  padding: clamp(4rem, 10vh, 8rem) clamp(1.25rem, 3.5vw, 2.5rem)
+    clamp(2.5rem, 6vh, 4.5rem);
+  display: flex;
+  justify-content: center;
+}
+
+.home-above-fold {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-spacer {
+  flex: 1;
+  min-height: 0;
+}
+
+.statement {
+  font-family: var(--display);
+  font-size: 11vw; /* fallback before JS fit runs */
+  font-weight: 400;
+  line-height: 0.88;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  text-transform: uppercase;
+  white-space: nowrap;
+  margin: 0;
+  display: block;
+  width: max-content;
+  max-width: none;
+  opacity: 0.82;
+}
+
+.statement-accent {
+  color: var(--yellow);
+}
+
+.statement-ki {
+  text-decoration: none;
+  color: var(--yellow);
+  cursor: pointer;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.statement-ki:hover {
+  color: #f2d97c;
+}
+
+.statement-ki:focus-visible {
+  outline: 1px dotted currentColor;
+  outline-offset: 0.15em;
+}
+
+.statement-link {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.statement-link:hover {
+  opacity: 1;
+}
+
+.garden-page {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.garden-loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+}
+
+.full-divider {
+  width: 100%;
+  height: 1px;
+  background: var(--line);
+}
+
+.home-section {
+  padding: 4rem 0 5rem;
+}
+
+/* ── Project rows ─────────────────────────────────── */
+
+.project-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  padding: 2.8rem 0;
+  border-top: 1px solid var(--line);
+  text-decoration: none;
+  color: inherit;
+}
+
+.project-row:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.project-row--dim {
+  opacity: 0.3;
+  cursor: default;
+  pointer-events: none;
+}
+
+a.project-row {
+  transition: opacity 0.15s ease;
+}
+
+.project-num {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  font-weight: 300;
+  letter-spacing: 0.18em;
+  color: var(--muted);
+  padding-top: 0.6rem;
+  min-width: 1.8rem;
+  flex-shrink: 0;
+}
+
+.project-body {
+  flex: 1;
+}
+
+.project-name {
+  font-family: var(--serif);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  font-weight: 300;
+  line-height: 1.05;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+  transition: color 0.18s ease;
+}
+
+.project-desc {
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: var(--muted);
+  line-height: 1.9;
+  max-width: 42ch;
+}
+
+.project-arrow {
+  font-size: 1.1rem;
+  color: var(--muted);
+  flex-shrink: 0;
+  padding-top: 0.5rem;
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+a.project-row:hover .project-name  { color: var(--yellow); }
+a.project-row:hover .project-arrow { transform: translate(4px, -4px); color: var(--yellow); }
+
+/* ── Footer ───────────────────────────────────────── */
+
+.home-footer {
+  padding: 2.5rem 0 3rem;
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-hint {
+  font-family: var(--sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  opacity: 0.25;
+}
 
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(10px); }

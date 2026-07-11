@@ -1,48 +1,86 @@
 "use client";
-import dynamic from "next/dynamic";
-import Image from "next/image";
 
-const Garden = dynamic(() => import("@/app/components/garden/Garden"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-screen bg-gradient-to-b from-sky-300 to-orange-200 flex items-center justify-center">
-      <p className="text-2xl">Loading garden...</p>
-    </div>
-  ),
-});
+import Link from "next/link";
+import { useEffect, useRef } from "react";
+
+const CALENDLY_URL = "#"; // wire up Calendly URL
+
+function FitStatement({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href?: string;
+}) {
+  const containerRef = useRef<HTMLElement>(null);
+  const textRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const text = textRef.current;
+    if (!container || !text) return;
+
+    const fit = () => {
+      text.style.fontSize = "1px";
+      const next = (container.clientWidth * 0.92) / text.scrollWidth;
+      text.style.fontSize = `${next}px`;
+    };
+
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(container);
+    void document.fonts.ready.then(fit);
+
+    return () => ro.disconnect();
+  }, []);
+
+  return (
+    <section ref={containerRef} className="home-hero">
+      {href ? (
+        <a
+          ref={(el) => {
+            textRef.current = el;
+          }}
+          href={href}
+          className="statement statement-link"
+        >
+          {children}
+        </a>
+      ) : (
+        <h1
+          ref={(el) => {
+            textRef.current = el;
+          }}
+          className="statement"
+        >
+          {children}
+        </h1>
+      )}
+    </section>
+  );
+}
 
 export default function RootPage() {
   return (
     <main>
-      <section className="container">
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "2rem",
-            marginBottom: "3rem",
-          }}
-        >
-          <div
-            style={{
-              position: "relative",
-              width: "min(78vw, 520px)",
-              aspectRatio: "1 / 1",
-              borderRadius: "9999px",
-              overflow: "hidden",
-              border: "1px solid var(--line)",
-              boxShadow: "0 0 0 1px rgba(255,255,255,0.03) inset",
-              background: "#0f1116",
-            }}
-          >
-            <Garden
-              onLighthouseClick={() =>
-                window.open("https://unlock-ki.com", "_blank", "noopener,noreferrer")
-              }
-            />
-          </div>
-        </div>
-      </section>
+      <div className="home-above-fold">
+        <FitStatement>
+          RAY BUILDS{" "}
+          <Link href="/garden" className="statement-accent statement-ki">
+            KI
+          </Link>
+        </FitStatement>
+
+        <div className="full-divider" />
+
+        <section className="home-spacer" aria-hidden="true" />
+      </div>
+
+      <div className="full-divider" />
+
+      <FitStatement href={CALENDLY_URL}>
+        LET US <span className="statement-accent">DANCE</span>
+      </FitStatement>
     </main>
   );
 }

@@ -2,11 +2,11 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { ModalProvider } from "./contexts/ModalContext";
-import { perpetua, merriweather, poppins } from "./fonts";
+import { perpetua, merriweather, poppins, bebasNeue } from "./fonts";
 
 export const metadata: Metadata = {
-  title: "raybuilds021",
-  description: "mind garden",
+  title: "Ray Builds Ki",
+  description: "Rachel Tomasetti — building Ki and more.",
 };
 
 export const viewport: Viewport = {
@@ -40,7 +40,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${perpetua.className} ${merriweather.variable} ${poppins.variable} antialiased`}>
+      <body className={`${perpetua.className} ${merriweather.variable} ${poppins.variable} ${bebasNeue.variable} antialiased`}>
         <ThemeProvider>
           <ModalProvider>{children}</ModalProvider>
         </ThemeProvider>

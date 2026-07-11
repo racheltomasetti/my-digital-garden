@@ -1,5 +1,5 @@
 import localFont from "next/font/local";
-import { Merriweather, Poppins } from "next/font/google";
+import { Merriweather, Poppins, Bebas_Neue } from "next/font/google";
 
 export const perpetua = localFont({
   src: "./fonts/perpetua.ttf",
@@ -18,5 +18,12 @@ export const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-poppins",
+  display: "swap",
+});
+
+export const bebasNeue = Bebas_Neue({
+  weight: ["400"],
+  subsets: ["latin"],
+  variable: "--font-display",
   display: "swap",
 });
