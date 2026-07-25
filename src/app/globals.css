@@ -455,21 +455,32 @@ footer {
 
 .home-hero {
   width: 100%;
-  padding: clamp(4rem, 10vh, 8rem) clamp(1.25rem, 3.5vw, 2.5rem)
-    clamp(2.5rem, 6vh, 4.5rem);
+  flex: none;
+  padding: clamp(0.75rem, 2vh, 1.5rem) clamp(1.25rem, 3.5vw, 2.5rem);
   display: flex;
   justify-content: center;
 }
 
-.home-above-fold {
-  min-height: 100dvh;
+.home-viewport {
+  height: 100dvh;
+  height: 100svh;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
-.home-spacer {
+.home-garden {
+  position: relative;
   flex: 1;
   min-height: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.home-garden-loading {
+  position: absolute;
+  inset: 0;
+  background: var(--bg);
 }
 
 .statement {

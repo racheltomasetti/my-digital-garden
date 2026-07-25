@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
+
+const Garden = dynamic(() => import("@/app/components/garden/Garden"), {
+  ssr: false,
+  loading: () => <div className="home-garden-loading" />,
+});
 
 const CALENDLY_URL = "#"; // wire up Calendly URL
 
@@ -22,7 +28,9 @@ function FitStatement({
 
     const fit = () => {
       text.style.fontSize = "1px";
-      const next = (container.clientWidth * 0.92) / text.scrollWidth;
+      const isDesktop = container.clientWidth >= 768;
+      const fraction = isDesktop ? 0.55 : 0.92;
+      const next = (container.clientWidth * fraction) / text.scrollWidth;
       text.style.fontSize = `${next}px`;
     };
 
@@ -62,19 +70,23 @@ function FitStatement({
 
 export default function RootPage() {
   return (
-    <main>
-      <div className="home-above-fold">
-        <FitStatement>
-          RAY BUILDS{" "}
-          <Link href="/garden" className="statement-accent statement-ki">
-            KI
-          </Link>
-        </FitStatement>
+    <main className="home-viewport">
+      <FitStatement>
+        RAY BUILDS{" "}
+        <Link href="/garden" className="statement-accent statement-ki">
+          KI
+        </Link>
+      </FitStatement>
 
-        <div className="full-divider" />
+      <div className="full-divider" />
 
-        <section className="home-spacer" aria-hidden="true" />
-      </div>
+      <section className="home-garden">
+        <Garden
+          onLighthouseClick={() => {
+            window.location.href = "https://unlock-ki.com";
+          }}
+        />
+      </section>
 
       <div className="full-divider" />
 
