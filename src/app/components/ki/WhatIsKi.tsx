@@ -1,9 +1,4 @@
-import BobbingKi from "./BobbingKi";
-import Image from "next/image";
-import { useTheme } from "@/app/contexts/ThemeContext";
-
 export default function WhatIsKi() {
-  const { theme } = useTheme();
   return (
     <div className="space-y-6">
       {/* What Ki Does */}

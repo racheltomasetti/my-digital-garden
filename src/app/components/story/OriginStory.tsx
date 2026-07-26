@@ -27,22 +27,22 @@ export default function OriginStory() {
       <MediaGallery />
 
       <div>
-        <p className="component-tag">// BuilderNote</p>
+        <p className="component-tag">{"// BuilderNote"}</p>
         <BuilderNote />
       </div>
 
       <div>
-        <p className="component-tag">// WhatIsKi</p>
+        <p className="component-tag">{"// WhatIsKi"}</p>
         <WhatIsKi />
       </div>
 
       <div>
-        <p className="component-tag">// AI</p>
+        <p className="component-tag">{"// AI"}</p>
         <AI />
       </div>
 
       <div>
-        <p className="component-tag">// Acknowledgements</p>
+        <p className="component-tag">{"// Acknowledgements"}</p>
         <Acknowledgements />
       </div>
     </div>
