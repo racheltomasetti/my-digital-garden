@@ -1,8 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
+import HomeNav from "@/app/components/HomeNav";
+import OriginStory from "@/app/components/story/OriginStory";
+import NOW from "@/app/components/ki/NOW";
+import Connect from "@/app/components/ki/Connect";
 
 const Garden = dynamic(() => import("@/app/components/garden/Garden"), {
   ssr: false,
@@ -70,17 +73,10 @@ function FitStatement({
 
 export default function RootPage() {
   return (
-    <main className="home-viewport">
-      <FitStatement>
-        RAY BUILDS{" "}
-        <Link href="/garden" className="statement-accent statement-ki">
-          KI
-        </Link>
-      </FitStatement>
+    <main className="home-page">
+      <HomeNav />
 
-      <div className="full-divider" />
-
-      <section className="home-garden">
+      <section id="top" className="home-garden">
         <Garden
           onLighthouseClick={() => {
             window.location.href = "https://unlock-ki.com";
@@ -90,9 +86,24 @@ export default function RootPage() {
 
       <div className="full-divider" />
 
-      <FitStatement href={CALENDLY_URL}>
-        LET US <span className="statement-accent">DANCE</span>
-      </FitStatement>
+      <section id="story" className="home-section">
+        <OriginStory />
+      </section>
+
+      <div className="full-divider" />
+
+      <section id="now" className="home-section">
+        <NOW />
+      </section>
+
+      <div className="full-divider" />
+
+      <section id="connect" className="home-section">
+        <Connect />
+        <FitStatement href={CALENDLY_URL}>
+          LET US <span className="statement-accent">DANCE</span>
+        </FitStatement>
+      </section>
     </main>
   );
 }
