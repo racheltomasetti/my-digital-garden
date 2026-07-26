@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import HomeNav from "@/app/components/HomeNav";
+import DevNotes from "@/app/components/DevNotes";
 import OriginStory from "@/app/components/story/OriginStory";
 import NOW from "@/app/components/ki/NOW";
 import Connect from "@/app/components/ki/Connect";
@@ -71,10 +72,15 @@ function FitStatement({
   );
 }
 
+function SectionTag({ children }: { children: string }) {
+  return <p className="section-tag">{children}</p>;
+}
+
 export default function RootPage() {
   return (
     <main className="home-page">
       <HomeNav />
+      <DevNotes />
 
       <section id="top" className="home-garden">
         <Garden
@@ -87,18 +93,21 @@ export default function RootPage() {
       <div className="full-divider" />
 
       <section id="story" className="home-section">
+        <SectionTag>##story</SectionTag>
         <OriginStory />
       </section>
 
       <div className="full-divider" />
 
       <section id="now" className="home-section">
+        <SectionTag>##now</SectionTag>
         <NOW />
       </section>
 
       <div className="full-divider" />
 
       <section id="connect" className="home-section">
+        <SectionTag>##connect</SectionTag>
         <Connect />
         <FitStatement href={CALENDLY_URL}>
           LET US <span className="statement-accent">DANCE</span>
