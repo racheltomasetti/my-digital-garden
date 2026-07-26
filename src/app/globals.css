@@ -616,6 +616,10 @@ footer {
   margin: 0 0 2rem;
 }
 
+.connect-icon {
+  color: var(--text);
+}
+
 .component-tag {
   font-family: monospace;
   font-size: 0.7rem;

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Github, Instagram, Linkedin, Youtube } from "lucide-react";
+import { useTheme } from "@/app/contexts/ThemeContext";
 
 const LEFT_LINKS = [
   { href: "https://github.com/racheltomasetti", label: "GitHub", Icon: Github },
@@ -15,6 +16,10 @@ const RIGHT_LINKS = [
 ] as const;
 
 export default function Connect() {
+  const { theme } = useTheme();
+  const logoSrc =
+    theme === "dark" ? "/assets/logo-light.png" : "/assets/logo-dark.png";
+
   return (
     <div className="flex items-center justify-center gap-5">
       {LEFT_LINKS.map(({ href, label, Icon }) => (
@@ -23,7 +28,7 @@ export default function Connect() {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#100f0f] hover:opacity-70 transition-opacity"
+          className="connect-icon hover:opacity-70 transition-opacity"
           aria-label={label}
         >
           <Icon size={22} strokeWidth={1.5} />
@@ -33,11 +38,11 @@ export default function Connect() {
         href="https://www.unlock-ki.com"
         target="_blank"
         rel="noopener noreferrer"
-        className="text-[#100f0f] hover:opacity-70 transition-opacity flex items-center justify-center"
+        className="connect-icon hover:opacity-70 transition-opacity flex items-center justify-center"
         aria-label="Unlock Ki"
       >
         <Image
-          src="/assets/logo-dark.png"
+          src={logoSrc}
           alt="Unlock Ki"
           width={28}
           height={28}
@@ -50,7 +55,7 @@ export default function Connect() {
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#100f0f] hover:opacity-70 transition-opacity"
+          className="connect-icon hover:opacity-70 transition-opacity"
           aria-label={label}
         >
           <Icon size={22} strokeWidth={1.5} />
