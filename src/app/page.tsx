@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { useEffect, useRef } from "react";
 import HomeNav from "@/app/components/HomeNav";
-import DevNotes from "@/app/components/DevNotes";
 import OriginStory from "@/app/components/story/OriginStory";
 import NOW from "@/app/components/ki/NOW";
 import Connect from "@/app/components/ki/Connect";
@@ -80,7 +79,6 @@ export default function RootPage() {
   return (
     <main className="home-page">
       <HomeNav />
-      <DevNotes />
 
       <section id="top" className="home-garden">
         <Garden
