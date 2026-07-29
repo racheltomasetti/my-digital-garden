@@ -454,7 +454,7 @@ footer {
 /* ── Home layout ──────────────────────────────────── */
 
 .home-nav {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   right: 0;
@@ -476,7 +476,7 @@ footer {
 .home-nav-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   box-sizing: border-box;
   padding: 0.85rem clamp(1.5rem, 4vw, 3rem);
@@ -484,48 +484,16 @@ footer {
   pointer-events: auto;
 }
 
-.home-nav-brand {
-  font-family: var(--sans);
-  font-size: 0.95rem;
-  font-weight: 400;
-  letter-spacing: 0.14em;
-  text-transform: lowercase;
-  color: var(--text);
-  text-decoration: none;
-  opacity: 0.9;
-  transition: opacity 0.2s ease;
-  flex-shrink: 0;
-}
-
-.home-nav-brand:hover {
-  opacity: 1;
-}
-
 .home-nav-links {
-  display: none;
+  display: flex;
   list-style: none;
-  gap: 2.25rem;
+  gap: clamp(1.5rem, 5vw, 2.25rem);
   margin: 0;
   padding: 0;
   align-items: center;
 }
 
-@media (min-width: 768px) {
-  .home-nav-links {
-    display: flex;
-  }
-
-  .home-nav-toggle {
-    display: none;
-  }
-
-  .home-nav-mobile {
-    display: none !important;
-  }
-}
-
-.home-nav-links a,
-.home-nav-mobile a {
+.home-nav-links a {
   font-family: var(--sans);
   font-size: 0.9rem;
   font-weight: 300;
@@ -537,39 +505,8 @@ footer {
   transition: opacity 0.2s ease;
 }
 
-.home-nav-links a:hover,
-.home-nav-mobile a:hover {
+.home-nav-links a:hover {
   opacity: 1;
-}
-
-.home-nav-toggle {
-  background: none;
-  border: none;
-  color: var(--text);
-  font-size: 1.25rem;
-  line-height: 1;
-  cursor: pointer;
-  padding: 0.25rem;
-  opacity: 0.7;
-  transition: opacity 0.2s ease;
-  pointer-events: auto;
-}
-
-.home-nav-toggle:hover {
-  opacity: 1;
-}
-
-.home-nav-mobile {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-  margin: 0;
-  padding: 0.25rem clamp(1.5rem, 4vw, 3rem) 1.5rem;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  pointer-events: auto;
 }
 
 .home-hero {
@@ -581,6 +518,7 @@ footer {
 }
 
 .home-page {
+  position: relative;
   min-height: 100dvh;
 }
 
@@ -613,7 +551,15 @@ footer {
   letter-spacing: 0.04em;
   color: var(--muted);
   opacity: 0.6;
-  margin: 0 0 2rem;
+  margin: 0 0 1rem;
+}
+
+.section-frame {
+  width: 100%;
+  min-height: clamp(14rem, 40vh, 28rem);
+  border: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
 }
 
 .connect-icon {
@@ -685,9 +631,9 @@ footer {
   text-align: center;
 }
 
-#story,
-#now,
-#connect {
+#ray,
+#builds,
+#ki {
   scroll-margin-top: 5rem;
 }
 
